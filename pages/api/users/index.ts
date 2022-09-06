@@ -6,6 +6,7 @@ const UserCreateSchema = Joi.object({
   name: Joi.string().required(),
 });
 
+// /api/users
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { method } = req;
 
@@ -13,6 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     case "POST":
       const { error } = UserCreateSchema.validate(req.body);
 
+      // FIXME: Validate error is joi
       if (error) {
         return res.status(400).json({
           message: "Invalid user data",
@@ -20,13 +22,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         });
       }
 
-      // POST /api/users -> create a new user
       const newUser = await User.create(req.body.name);
 
       res.status(200).json(newUser);
       break;
     case "GET":
-      // GET /api/users -> get all users
       const users = await User.getAll();
       res.status(200).json(users);
       break;
