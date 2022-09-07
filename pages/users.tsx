@@ -1,8 +1,8 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { IUser } from "../../controllers/User";
-import UsersService from "../../services/UserService";
+import { IUser } from "../controllers/User";
+import UsersService from "../services/UserService";
 
 export const getStaticProps = async () => {
   let users = [];

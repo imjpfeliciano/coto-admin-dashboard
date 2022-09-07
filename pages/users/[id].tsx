@@ -12,7 +12,7 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context: any) => {
-  let user = {};
+  let user = null;
   let error = null;
   try {
     const { id } = context.params;
@@ -31,10 +31,13 @@ export const getStaticProps = async (context: any) => {
 
 interface ProfilePageProps {
   user: IUser;
+  error: string;
 }
 
 // NOTE: Profile page for a user
-const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
+const ProfilePage: NextPage<ProfilePageProps> = ({ user, error }) => {
+  if (error) return null;
+  
   return (
     <div>
       <h1>{user.name}</h1>
