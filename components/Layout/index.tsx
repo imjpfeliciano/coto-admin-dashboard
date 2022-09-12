@@ -1,38 +1,43 @@
 import styled from "styled-components";
+import theme from "../../utils/theme";
 
-const LayoutContainer = styled.div`
+export const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100vw;
 `;
 
-const SidebarContainer = styled.div`
-  background-color: #174a6c;
+export const SidebarContainer = styled.div`
+  background-color: ${theme.colors.white};
   width: 20%;
+  border-left: 1px solid ${theme.colors.divider};
+  padding: 1rem;
 `;
 
-const HeaderContainer = styled.div`
-  background-color: #000;
+export const HeaderContainer = styled.div`
+  background-color: ${theme.colors.primary};
   width: 100%;
   height: 4rem;
+  border-bottom: 1px solid ${theme.colors.divider};
+  padding: 1rem;
 `;
 
-const ContentContainer = styled.div`
-  background-color: #ddd;
+export const ContentContainer = styled.div`
+  background-color: ${theme.colors.bgColor};
   width: 80%;
+  padding: 2rem;
 `;
 
-const MainViewContainer = styled.div`
-  /* background-color: #; */
+export const MainViewContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
   height: 90%;
 `;
 
-const FooterContainer = styled.div`
-  background-color: purple;
+export const FooterContainer = styled.div`
+  background-color: ${theme.colors.darkPrimary};
   width: 100%;
   height: 4rem;
 `;
@@ -46,7 +51,7 @@ const Layout = () => {
           <SidebarContainer>sidebar</SidebarContainer>
           <ContentContainer>content</ContentContainer>
         </MainViewContainer>
-        <FooterContainer>footer</FooterContainer>
+        {/* <FooterContainer>footer</FooterContainer> */}
       </LayoutContainer>
     </>
   );

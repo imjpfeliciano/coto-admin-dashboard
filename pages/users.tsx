@@ -3,6 +3,22 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { IUser } from "../controllers/User";
 import UsersService from "../services/UserService";
+import Card from "../components/Card";
+import UserRowItem from "../components/Tables/userRowItem";
+import {
+  TableContainer,
+  TableHeader,
+  TableHeaderContainer,
+} from "../components/Tables/Table";
+import MaterialIcon from "../components/MaterialIcon";
+
+// TODO: Add pagination
+// TODO: Add search
+// TODO: Add sorting
+// TODO: Add filtering
+// TODO: Add user creation modal
+// TODO: Add user deletion alert
+// TODO: Add user update page
 
 export const getStaticProps = async () => {
   let users = [];
@@ -57,7 +73,7 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
   }, [reloadUsers]);
 
   return (
-    <div>
+    <Card>
       <h1>Users</h1>
 
       {/* User create form */}
@@ -73,13 +89,43 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
 
       {/* User list table */}
       <UserList>
-        {usersList.map((user) => (
-          <div key={user.id}>
-            <a href={`/users/${user.id}`}>{user.name}</a>
-          </div>
-        ))}
+        <TableContainer>
+          <TableHeaderContainer>
+            <tr>
+              <TableHeader colSpan={5}>
+                <div>
+                  <h3>Users management</h3>
+                  <button>
+                    <MaterialIcon iconName="add" />
+                    Add user
+                  </button>
+                </div>
+              </TableHeader>
+            </tr>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Last update</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </TableHeaderContainer>
+          <tbody>
+            {usersList.map((user, index) => (
+              <UserRowItem
+                key={user.id}
+                index={index + 1}
+                onEdit={() => {}}
+                onDelete={() => {}}
+                name={user.name}
+                updatedAt={user.updatedAt}
+                state="Active"
+              />
+            ))}
+          </tbody>
+        </TableContainer>
       </UserList>
-    </div>
+    </Card>
   );
 };
 

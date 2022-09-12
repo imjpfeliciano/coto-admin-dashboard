@@ -13,6 +13,7 @@
   "dependencies": {
     "@hapi/joi": "^17.1.1",
     "@types/styled-components": "^5.1.26",
+    "babel-preset-next": "^1.4.0",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
