@@ -6,11 +6,13 @@ import UsersService from "../services/UserService";
 import Card from "../components/Card";
 import UserRowItem from "../components/Tables/userRowItem";
 import {
+  TableColumnNames,
   TableContainer,
   TableHeader,
   TableHeaderContainer,
 } from "../components/Tables/Table";
 import MaterialIcon from "../components/MaterialIcon";
+import { IconButton } from "../components/Button";
 
 // TODO: Add pagination
 // TODO: Add search
@@ -76,18 +78,6 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
     <Card>
       <h1>Users</h1>
 
-      {/* User create form */}
-      {/* FIXME: Agregar validacion del formulario */}
-      <UserCreateForm>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <button onClick={onSubmitUser}>Create User</button>
-      </UserCreateForm>
-
-      {/* User list table */}
       <UserList>
         <TableContainer>
           <TableHeaderContainer>
@@ -95,28 +85,37 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
               <TableHeader colSpan={5}>
                 <div>
                   <h3>Users management</h3>
-                  <button>
-                    <MaterialIcon iconName="add" />
-                    Add user
-                  </button>
+                  <div>
+                    <IconButton
+                      icon="add"
+                      label="Add new user"
+                      onClick={() => {
+                        console.log("Add user");
+                      }}
+                    />
+                  </div>
                 </div>
               </TableHeader>
             </tr>
-            <tr>
+            <TableColumnNames>
               <th>#</th>
               <th>Name</th>
               <th>Last update</th>
               <th>Status</th>
               <th>Actions</th>
-            </tr>
+            </TableColumnNames>
           </TableHeaderContainer>
           <tbody>
             {usersList.map((user, index) => (
               <UserRowItem
                 key={user.id}
                 index={index + 1}
-                onEdit={() => {}}
-                onDelete={() => {}}
+                onEdit={() => {
+                  console.log("Edit user");
+                }}
+                onDelete={() => {
+                  console.log("Delete user");
+                }}
                 name={user.name}
                 updatedAt={user.updatedAt}
                 state="Active"

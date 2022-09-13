@@ -8,12 +8,20 @@ export const TableContainer = styled.table`
 `;
 
 export const TableCell = styled.td`
-  /* display: flex;
-  flex-direction: row; */
   text-align: center;
   padding: 16px;
+`;
 
-  /* align-items: center; */
+interface TableCellProps {
+  align?: "left" | "center" | "right";
+}
+
+export const TableCellContent = styled.div<TableCellProps>`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: ${(props) => props.align || "center"};
+  margin-left: ${(props) => (props.align === "left" ? "4rem" : "0")};
 `;
 
 export const TableRow = styled.tr`
@@ -31,6 +39,7 @@ export const TableHeader = styled.th`
   background-color: ${theme.colors.accent};
   padding: 16px;
   color: ${theme.colors.text};
+  border-radius: 5px 5px 0 0;
 
   div {
     display: flex;
@@ -38,4 +47,8 @@ export const TableHeader = styled.th`
 
     justify-content: space-between;
   }
+`;
+
+export const TableColumnNames = styled.tr`
+  height: 4rem;
 `;

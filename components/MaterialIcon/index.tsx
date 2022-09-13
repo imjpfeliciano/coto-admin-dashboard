@@ -10,7 +10,6 @@ interface iconProps {
 const IconContainer = styled.span`
   color: ${(props) => props.color || theme.colors.accent};
   cursor: pointer;
-  margin-right: 1rem;
 `;
 
 const MaterialIcon = ({ iconName, onClick, color }: iconProps) => {

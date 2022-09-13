@@ -8,6 +8,8 @@ export interface IUser {
   // TODO: Validate if we want to add vehicles to the user model
 }
 
+import UserModel from "../models/User";
+
 const mockedUsers: IUser[] = [
   {
     id: "1",
@@ -44,9 +46,19 @@ class User {
       updatedAt,
       scopes,
     };
-    this.users.push(newUser);
 
-    return newUser;
+    try {
+      const response = await UserModel.create(newUser);
+      if (response.error) {
+        return response;
+      }
+      return response;
+    } catch (error) {
+      console.log({ error });
+      return {
+        error,
+      };
+    }
   }
 
   async getAll() {

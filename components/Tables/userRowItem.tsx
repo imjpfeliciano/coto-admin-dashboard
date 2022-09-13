@@ -1,6 +1,6 @@
 import { Avatar } from "../Avatar";
 import MaterialIcon from "../MaterialIcon";
-import { TableCell, TableRow } from "./Table";
+import { TableCell, TableCellContent, TableRow } from "./Table";
 
 interface UserRowItemProps {
   index: number;
@@ -22,16 +22,26 @@ const UserRowItem = ({
   const date = new Date(updatedAt).toDateString();
   return (
     <TableRow>
-      <TableCell>{index}</TableCell>
-      <TableCell align="left">
-        <Avatar src="https://avatars.githubusercontent.com/u/11733036?v=4" />
-        {name}
-      </TableCell>
-      <TableCell>{date}</TableCell>
-      <TableCell>{state}</TableCell>
       <TableCell>
-        <MaterialIcon iconName="edit" onClick={onEdit} />
-        <MaterialIcon iconName="delete" onClick={onDelete} />
+        <TableCellContent>{index}</TableCellContent>
+      </TableCell>
+      <TableCell>
+        <TableCellContent align="left">
+          <Avatar src="https://avatars.githubusercontent.com/u/11733036?v=4" />
+          {name}
+        </TableCellContent>
+      </TableCell>
+      <TableCell>
+        <TableCellContent>{date}</TableCellContent>
+      </TableCell>
+      <TableCell>
+        <TableCellContent>{state}</TableCellContent>
+      </TableCell>
+      <TableCell>
+        <TableCellContent>
+          <MaterialIcon iconName="edit" onClick={onEdit} />
+          <MaterialIcon iconName="delete" onClick={onDelete} />
+        </TableCellContent>
       </TableCell>
     </TableRow>
   );

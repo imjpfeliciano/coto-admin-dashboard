@@ -23,7 +23,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
 
       const newUser = await User.create(req.body.name);
-
+      if (newUser.error) {
+        return res.status(400).json({
+          error: newUser.error,
+        });
+      }
       res.status(200).json(newUser);
       break;
     case "GET":
