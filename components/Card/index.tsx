@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import theme from "../../utils/theme";
 
+export const CardTitle = styled.h1`
+  color: ${theme.colors.primaryText};
+`;
+
 const Card = styled.div`
   background-color: ${theme.colors.white};
   border-radius: 0.5rem;

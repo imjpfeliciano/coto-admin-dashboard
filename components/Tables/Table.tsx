@@ -2,6 +2,7 @@ import styled from "styled-components";
 import theme from "../../utils/theme";
 
 export const TableContainer = styled.table`
+  color: ${theme.colors.primaryText};
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;

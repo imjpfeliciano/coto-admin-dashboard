@@ -7,13 +7,9 @@ const users = db.get("users");
 const UserModel = {
   create: async (payload) => {
     try {
-      console.log({ payload });
-      console.log({ users, db });
       const created = await users.insert(payload);
-      console.log({ created });
       return created;
     } catch (error) {
-      console.log({ error });
       return {
         error,
       };

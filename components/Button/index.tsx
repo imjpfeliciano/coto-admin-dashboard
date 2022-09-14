@@ -5,6 +5,7 @@ import theme from "../../utils/theme";
 export const Button = styled.button``;
 
 export const ButtonWithIcon = styled.button`
+  background-color: ${theme.colors.bgColor};
   cursor: pointer;
   border-radius: 5px;
   border: none;
@@ -14,6 +15,7 @@ export const ButtonWithIcon = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-weight: bold;
 `;
 
 const IconContainer = styled.div`

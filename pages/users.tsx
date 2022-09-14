@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { IUser } from "../controllers/User";
 import UsersService from "../services/UserService";
-import Card from "../components/Card";
+import Card, { CardTitle } from "../components/Card";
 import UserRowItem from "../components/Tables/userRowItem";
 import {
   TableColumnNames,
@@ -76,7 +76,7 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
 
   return (
     <Card>
-      <h1>Users</h1>
+      <CardTitle>Users</CardTitle>
 
       <UserList>
         <TableContainer>
