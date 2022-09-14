@@ -13,6 +13,7 @@ import {
 } from "../components/Tables/Table";
 import MaterialIcon from "../components/MaterialIcon";
 import { IconButton } from "../components/Button";
+import AddUserModal from "../components/Modals/AddUserModal";
 
 // TODO: Add pagination
 // TODO: Add search
@@ -49,16 +50,13 @@ const UserList = styled.div``;
 
 // Users list page
 const UsersPage: NextPage<HomepageProps> = ({ users }) => {
+  const [isUserModalOpen, setUserModalOpen] = useState(false);
   const [usersList, setUsers] = useState(users);
   const [reloadUsers, setReloadUsers] = useState(false);
-  const [username, setUsername] = useState("");
 
-  const onSubmitUser = async () => {
-    if (!username.trim()) return;
-
-    await UsersService.createUser(username);
-
-    setUsername("");
+  // TODO: Fix payload type definition
+  const onSubmitUser = async (payload: any) => {
+    await UsersService.createUser(payload);
     setReloadUsers(true);
   };
 
@@ -75,56 +73,61 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
   }, [reloadUsers]);
 
   return (
-    <Card>
-      <CardTitle>Users</CardTitle>
+    <>
+      <Card>
+        <CardTitle>Users</CardTitle>
 
-      <UserList>
-        <TableContainer>
-          <TableHeaderContainer>
-            <tr>
-              <TableHeader colSpan={5}>
-                <div>
-                  <h3>Users management</h3>
+        <UserList>
+          <TableContainer>
+            <TableHeaderContainer>
+              <tr>
+                <TableHeader colSpan={5}>
                   <div>
-                    <IconButton
-                      icon="add"
-                      label="Add new user"
-                      onClick={() => {
-                        console.log("Add user");
-                      }}
-                    />
+                    <h3>Users management</h3>
+                    <div>
+                      <IconButton
+                        icon="add"
+                        label="Add new user"
+                        onClick={() => setUserModalOpen(true)}
+                      />
+                    </div>
                   </div>
-                </div>
-              </TableHeader>
-            </tr>
-            <TableColumnNames>
-              <th>#</th>
-              <th>Name</th>
-              <th>Last update</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </TableColumnNames>
-          </TableHeaderContainer>
-          <tbody>
-            {usersList.map((user, index) => (
-              <UserRowItem
-                key={user.id}
-                index={index + 1}
-                onEdit={() => {
-                  console.log("Edit user");
-                }}
-                onDelete={() => {
-                  console.log("Delete user");
-                }}
-                name={user.name}
-                updatedAt={user.updatedAt}
-                state="Active"
-              />
-            ))}
-          </tbody>
-        </TableContainer>
-      </UserList>
-    </Card>
+                </TableHeader>
+              </tr>
+              <TableColumnNames>
+                <th>#</th>
+                <th>Name</th>
+                <th>Last update</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </TableColumnNames>
+            </TableHeaderContainer>
+            <tbody>
+              {usersList.map((user, index) => (
+                <UserRowItem
+                  key={user._id}
+                  index={index + 1}
+                  onEdit={() => {
+                    console.log("Edit user");
+                  }}
+                  onDelete={() => {
+                    console.log("Delete user");
+                  }}
+                  name={user.name}
+                  updatedAt={user.updatedAt}
+                  state={user.active ? "Active" : "Inactive"}
+                />
+              ))}
+            </tbody>
+          </TableContainer>
+        </UserList>
+      </Card>
+      <AddUserModal
+        isOpen={isUserModalOpen}
+        onClose={() => setUserModalOpen(false)}
+        onSave={onSubmitUser}
+      />
+    </>
   );
 };
 

@@ -1,46 +1,30 @@
-export interface IUser {
-  id: string;
+export interface BaseUser {
   name: string;
   scopes: string[]; // ["user", "admin"]
   createdAt: string;
   updatedAt: string;
+  deletedAt?: string;
+  active: boolean;
+}
+export interface IUser extends BaseUser {
+  _id: string;
   // TODO: Validate if houseId is required when adding new users
   // TODO: Validate if we want to add vehicles to the user model
 }
 
 import UserModel from "../models/User";
 
-const mockedUsers: IUser[] = [
-  {
-    id: "1",
-    name: "Jona",
-    createdAt: "2022-09-07T13:34:52.061Z",
-    updatedAt: "2022-09-07T13:34:52.061Z",
-    scopes: ["user"],
-  },
-  {
-    id: "2",
-    name: "Jane Doe",
-    createdAt: "2022-09-07T13:34:52.061Z",
-    updatedAt: "2022-09-07T13:34:52.061Z",
-    scopes: ["user"],
-  },
-];
 class User {
-  users: IUser[];
-
   constructor() {
-    this.users = mockedUsers;
   }
 
   async create(name: string) {
-    const userId = this.users.length + 1;
     const createdAt = new Date().toISOString();
     const updatedAt = new Date().toISOString();
     const scopes = ["user"];
 
     const newUser = {
-      id: String(userId),
+      active: true,
       name,
       createdAt,
       updatedAt,
@@ -61,29 +45,24 @@ class User {
   }
 
   async getAll() {
-    return this.users;
+    // TODO: Add error handling
+    const response = await UserModel.getAll();
+    return response;
   }
 
   async get(id: string) {
-    const user = this.users.find(
-      (user: IUser) => Number(user.id) === Number(id)
-    );
+    const user = await UserModel.get(id);
 
     // TODO: Validate if we want to return a 404 error
     return user;
   }
 
   async update(id: string, data: any) {
-    const user = this.users.find(
-      (user: IUser) => Number(user.id) === Number(id)
-    );
-
-    // TODO: Validate if we want to return a 404 error
-    const updatedUser = {
-      ...user,
+    const payload = {
       ...data,
-      updatedAt: new Date(),
-    };
+      updatedAt: new Date().toISOString(),
+    }
+    const updatedUser = await UserModel.update(id, payload);
     return updatedUser;
   }
 
@@ -91,10 +70,8 @@ class User {
     // TODO: Validate that the request is coming from an admin
 
     // TODO: Validate if we want to return a 404 error
-    this.users = this.users.filter(
-      (user: IUser) => Number(user.id) !== Number(id)
-    );
-    return true;
+    const deleted = await UserModel.delete(id);
+    return deleted;
   }
 }
 

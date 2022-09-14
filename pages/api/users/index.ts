@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import * as Joi from "@hapi/joi";
+import Joi from "@hapi/joi";
+import { StatusCodes } from "http-status-codes";
 import User from "../../../controllers/User";
 
 const UserCreateSchema = Joi.object({
@@ -16,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       // FIXME: Validate error is joi
       if (error) {
-        return res.status(400).json({
+        return res.status(StatusCodes.BAD_REQUEST).json({
           message: "Invalid user data",
           error: error.details[0].message,
         });
@@ -24,15 +25,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const newUser = await User.create(req.body.name);
       if (newUser.error) {
-        return res.status(400).json({
+        return res.status(StatusCodes.BAD_REQUEST).json({
           error: newUser.error,
         });
       }
-      res.status(200).json(newUser);
+      res.status(StatusCodes.OK).json(newUser);
       break;
     case "GET":
       const users = await User.getAll();
-      res.status(200).json(users);
+      res.status(StatusCodes.OK).json(users);
       break;
     // FIXME: return message for invalid methods
   }

@@ -6,11 +6,8 @@ const UsersService = {
     return users;
   },
 
-  createUser: async (name: string) => {
-    const payload = {
-      name,
-    };
-
+  // TODO: add payload type definition
+  createUser: async (payload: any) => {
     const newUser = await RequestFactory.post("/api/users", payload);
     return newUser;
   },
