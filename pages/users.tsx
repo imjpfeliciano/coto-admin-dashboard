@@ -11,7 +11,6 @@ import {
   TableHeader,
   TableHeaderContainer,
 } from "../components/Tables/Table";
-import MaterialIcon from "../components/MaterialIcon";
 import { IconButton } from "../components/Button";
 import AddUserModal from "../components/Modals/AddUserModal";
 
@@ -19,9 +18,7 @@ import AddUserModal from "../components/Modals/AddUserModal";
 // TODO: Add search
 // TODO: Add sorting
 // TODO: Add filtering
-// TODO: Add user creation modal
 // TODO: Add user deletion alert
-// TODO: Add user update page
 
 export const getStaticProps = async () => {
   let users = [];
@@ -44,6 +41,11 @@ interface HomepageProps {
   users: IUser[];
 }
 
+const USER_STATES = {
+  active: "Active",
+  inactive: "Inactive",
+};
+
 const UserCreateForm = styled.div``;
 
 const UserList = styled.div``;
@@ -54,7 +56,7 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
   const [usersList, setUsers] = useState(users);
   const [reloadUsers, setReloadUsers] = useState(false);
 
-  // TODO: Fix payload type definition
+  // FIXME: Fix payload type definition
   const onSubmitUser = async (payload: any) => {
     await UsersService.createUser(payload);
     setReloadUsers(true);
@@ -72,6 +74,20 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
     reloadData();
   }, [reloadUsers]);
 
+  // FIXME: Before calling the delete function, we should show a confirmation modal
+  const onUserDelete = async (id: string) => {
+    console.log(`Deleting user with id: ${id}`);
+    await UsersService.deleteUser(id);
+    setReloadUsers(true);
+  };
+
+  /**
+   * TODO:
+   * Add filter to show only active users - default
+   * Add filter to show only inactive users
+   * Add re-active user button
+   */
+
   return (
     <>
       <Card>
@@ -81,6 +97,7 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
           <TableContainer>
             <TableHeaderContainer>
               <tr>
+                {/* FIXME:  Align elements to the center - vertically */}
                 <TableHeader colSpan={5}>
                   <div>
                     <h3>Users management</h3>
@@ -95,7 +112,7 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
                 </TableHeader>
               </tr>
               <TableColumnNames>
-                <th>#</th>
+                <th># Int</th>
                 <th>Name</th>
                 <th>Last update</th>
                 <th>Status</th>
@@ -103,21 +120,26 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
               </TableColumnNames>
             </TableHeaderContainer>
             <tbody>
-              {usersList.map((user, index) => (
-                <UserRowItem
-                  key={user._id}
-                  index={index + 1}
-                  onEdit={() => {
-                    console.log("Edit user");
-                  }}
-                  onDelete={() => {
-                    console.log("Delete user");
-                  }}
-                  name={user.name}
-                  updatedAt={user.updatedAt}
-                  state={user.active ? "Active" : "Inactive"}
-                />
-              ))}
+              {/* TODO: Sort users by internal address */}
+              {usersList.map((user, index) => {
+                if (!user.active) return null;
+
+                return (
+                  <UserRowItem
+                    key={user._id}
+                    index={user.address}
+                    onEdit={() => {
+                      console.log("Edit user");
+                    }}
+                    onDelete={() => onUserDelete(user._id)}
+                    name={user.name}
+                    updatedAt={user.updatedAt}
+                    state={
+                      user.active ? USER_STATES.active : USER_STATES.inactive
+                    }
+                  />
+                );
+              })}
             </tbody>
           </TableContainer>
         </UserList>

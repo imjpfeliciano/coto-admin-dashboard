@@ -5,6 +5,7 @@ import theme from "../../utils/theme";
 export const Button = styled.button``;
 
 export const ButtonWithIcon = styled.button`
+  height: 36px;
   background-color: ${theme.colors.bgColor};
   cursor: pointer;
   border-radius: 5px;

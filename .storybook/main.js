@@ -1,6 +1,7 @@
 module.exports = {
   stories: [
     "../components/**/**/*.stories.@(js|jsx|ts|tsx)",
+    "../containers/**/**/*.stories.@(js|jsx|ts|tsx)",
     "../stories/**/*.stories.mdx",
     "../stories/**/*.stories.@(js|jsx|ts|tsx)",
   ],

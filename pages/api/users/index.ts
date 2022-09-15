@@ -5,15 +5,17 @@ import User from "../../../controllers/User";
 
 const UserCreateSchema = Joi.object({
   name: Joi.string().required(),
+  email: Joi.string().email().required(),
+  address: Joi.string().required(),
 });
 
 // /api/users
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { method } = req;
+  const { method, body: payload } = req;
 
   switch (method) {
     case "POST":
-      const { error } = UserCreateSchema.validate(req.body);
+      const { error } = UserCreateSchema.validate(payload);
 
       // FIXME: Validate error is joi
       if (error) {
@@ -23,7 +25,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         });
       }
 
-      const newUser = await User.create(req.body.name);
+      const newUser = await User.create(payload);
       if (newUser.error) {
         return res.status(StatusCodes.BAD_REQUEST).json({
           error: newUser.error,

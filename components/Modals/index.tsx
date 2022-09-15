@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
+import MaterialIcon from "../MaterialIcon";
 
 // styles where copied from: https://devrecipes.net/modal-component-with-next-js/
+const StyledModalTitle = styled.h2`
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+`;
+
 const StyledModalBody = styled.div`
   padding-top: 10px;
 `;
@@ -37,17 +45,14 @@ const ModalContainer = ({ children, onClose }: any) => (
   <StyledModalOverlay>
     <StyledModal>
       <StyledModalHeader>
-        <a href="#" onClick={onClose}>
-          x
-        </a>
+        <MaterialIcon iconName="close" onClick={onClose} />
       </StyledModalHeader>
-      {/* {title && <StyledModalTitle>{title}</StyledModalTitle>} */}
       <StyledModalBody>{children}</StyledModalBody>
     </StyledModal>
   </StyledModalOverlay>
 );
 
-const Modal = ({ children, onClose }: any) => {
+const Modal = ({ children, onClose, title }: any) => {
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => {

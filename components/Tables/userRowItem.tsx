@@ -3,7 +3,7 @@ import MaterialIcon from "../MaterialIcon";
 import { TableCell, TableCellContent, TableRow } from "./Table";
 
 interface UserRowItemProps {
-  index: number;
+  index: string;
   name: string;
   updatedAt: string;
   state: string;
