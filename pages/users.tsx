@@ -20,6 +20,12 @@ import AddUserModal from "../components/Modals/AddUserModal";
 // TODO: Add filtering
 // TODO: Add user deletion alert
 
+const GroupContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 export const getStaticProps = async () => {
   let users = [];
   let error = null;
@@ -90,27 +96,22 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
 
   return (
     <>
+      <CardTitle>Users</CardTitle>
+      <span>Home / Users</span>
       <Card>
-        <CardTitle>Users</CardTitle>
-
         <UserList>
+          <GroupContent>
+            <h3>Users management</h3>
+            <div>
+              <IconButton
+                icon="add"
+                label="Add new user"
+                onClick={() => setUserModalOpen(true)}
+              />
+            </div>
+          </GroupContent>
           <TableContainer>
             <TableHeaderContainer>
-              <tr>
-                {/* FIXME:  Align elements to the center - vertically */}
-                <TableHeader colSpan={5}>
-                  <div>
-                    <h3>Users management</h3>
-                    <div>
-                      <IconButton
-                        icon="add"
-                        label="Add new user"
-                        onClick={() => setUserModalOpen(true)}
-                      />
-                    </div>
-                  </div>
-                </TableHeader>
-              </tr>
               <TableColumnNames>
                 <th># Int</th>
                 <th>Name</th>

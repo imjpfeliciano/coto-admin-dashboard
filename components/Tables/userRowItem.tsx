@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { Avatar } from "../Avatar";
 import MaterialIcon from "../MaterialIcon";
 import { TableCell, TableCellContent, TableRow } from "./Table";
@@ -10,6 +11,13 @@ interface UserRowItemProps {
   onEdit: () => void;
   onDelete: () => void;
 }
+
+const UserGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: -webkit-fill-available;
+`;
 
 const UserRowItem = ({
   index,
@@ -26,9 +34,12 @@ const UserRowItem = ({
         <TableCellContent>{index}</TableCellContent>
       </TableCell>
       <TableCell>
-        <TableCellContent align="left">
-          <Avatar src="https://avatars.githubusercontent.com/u/11733036?v=4" />
-          {name}
+        <TableCellContent>
+          <UserGroup>
+            <Avatar src="https://avatars.githubusercontent.com/u/11733036?v=4" />
+            {name}
+          </UserGroup>
+
         </TableCellContent>
       </TableCell>
       <TableCell>
