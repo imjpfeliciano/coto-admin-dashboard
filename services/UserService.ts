@@ -17,7 +17,11 @@ const UsersService = {
     return user;
   },
 
-  updateUser: async (id: string, payload: any) => {
+  update: async (id: string, payload: any) => {
+    const requestPayload = {
+      ...payload,
+      updatedAt: new Date().toISOString(),
+    };
     const updatedUser = await RequestFactory.put(`/api/users/${id}`, payload);
     return updatedUser;
   },

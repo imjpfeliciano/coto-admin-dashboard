@@ -13,6 +13,7 @@ import {
 } from "../components/Tables/Table";
 import { IconButton } from "../components/Button";
 import AddUserModal from "../components/Modals/AddUserModal";
+import Breadcum from "../components/Breadcum";
 
 // TODO: Add pagination
 // TODO: Add search
@@ -24,6 +25,18 @@ const GroupContent = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  h3 {
+    color: black; // TODO: Move to theme
+  }
+`;
+
+const BreadcumsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  color: gray;
 `;
 
 export const getStaticProps = async () => {
@@ -80,6 +93,20 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
     reloadData();
   }, [reloadUsers]);
 
+  const onSoftDelete = async (id: string) => {
+    await UsersService.update(id, {
+      active: false,
+    });
+    setReloadUsers(true);
+  };
+
+  const onRestore = async (id: string) => {
+    await UsersService.update(id, {
+      active: true,
+    });
+    setReloadUsers(true);
+  };
+
   // FIXME: Before calling the delete function, we should show a confirmation modal
   const onUserDelete = async (id: string) => {
     console.log(`Deleting user with id: ${id}`);
@@ -92,12 +119,11 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
    * Add filter to show only active users - default
    * Add filter to show only inactive users
    * Add re-active user button
+   * Move Breadcunms to a separate component
    */
 
   return (
     <>
-      <CardTitle>Users</CardTitle>
-      <span>Home / Users</span>
       <Card>
         <UserList>
           <GroupContent>
@@ -121,23 +147,26 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
               </TableColumnNames>
             </TableHeaderContainer>
             <tbody>
-              {/* TODO: Sort users by internal address */}
               {usersList.map((user, index) => {
-                if (!user.active) return null;
+                if (user.deletedAt) return null;
 
                 return (
                   <UserRowItem
                     key={user._id}
+                    id={user._id}
                     index={user.address}
                     onEdit={() => {
                       console.log("Edit user");
                     }}
+                    onSoftDelete={() => onSoftDelete(user._id)}
                     onDelete={() => onUserDelete(user._id)}
+                    onRestore={() => onRestore(user._id)}
                     name={user.name}
                     updatedAt={user.updatedAt}
                     state={
                       user.active ? USER_STATES.active : USER_STATES.inactive
                     }
+                    active={user.active}
                   />
                 );
               })}

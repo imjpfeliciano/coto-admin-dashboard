@@ -1,11 +1,14 @@
 import { NextPage } from "next";
+import Breadcum from "../../components/Breadcum";
+import Card from "../../components/Card";
+import AddUserForm from "../../containers/AddUserForm";
 import { IUser } from "../../controllers/User";
 import UsersService from "../../services/UserService";
 
 export const getStaticPaths = async () => {
   const users: IUser[] = await UsersService.fetchUsers();
   const paths = users.map((user) => ({
-    params: { id: user.id.toString() },
+    params: { id: user._id.toString() },
   }));
 
   return { paths, fallback: false };
@@ -37,10 +40,26 @@ interface ProfilePageProps {
 // NOTE: Profile page for a user
 const ProfilePage: NextPage<ProfilePageProps> = ({ user, error }) => {
   if (error) return null;
-  
+
+  const formInitialPayload = {
+    name: user.name,
+    email: user.email,
+    address: user.address,
+  };
+
+  const onEditUser = async (payload: any) => {
+    await UsersService.update(user._id, payload);
+  };
+
+  // TODO: Show alert on user update
   return (
     <div>
-      <h1>{user.name}</h1>
+      <Card>
+        <AddUserForm
+          onUserSave={onEditUser}
+          formInitialState={formInitialPayload}
+        />
+      </Card>
     </div>
   );
 };

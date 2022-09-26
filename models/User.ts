@@ -57,13 +57,10 @@ const UserModel = {
     }
   },
 
-  // Soft delete
   delete: async (id: string) => {
     try {
-      console.log({ id });
       const payload = {
         deletedAt: new Date().toISOString(),
-        active: false,
       };
 
       const deleted = await users.findOneAndUpdate(

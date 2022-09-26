@@ -9,6 +9,8 @@ import {
 } from "../components/Layout";
 import Sidebar from "../containers/Sidebar";
 import SidebarRoutes from "../constants/sidebar";
+import Breadcum from "../components/Breadcum";
+import { CardTitle } from "../components/Card";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -20,6 +22,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Sidebar options={SidebarRoutes} />
           </SidebarContainer>
           <ContentContainer>
+            <CardTitle>Admin Dashboard</CardTitle>
+            <Breadcum />
             <Component {...pageProps} />
           </ContentContainer>
         </MainViewContainer>

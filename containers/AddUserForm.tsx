@@ -6,6 +6,11 @@ import InputField from "../components/Input/InputField";
 interface AddUserFormProps {
   // FIXME: Fix payload type definition
   onUserSave: (payload: any) => void;
+  formInitialState?: {
+    name: string;
+    email: string;
+    address: string;
+  };
 }
 
 const AddUserFormContainer = styled.div`
@@ -39,8 +44,8 @@ const initialState = {
   address: "",
 };
 
-const AddUserForm = ({ onUserSave }: AddUserFormProps) => {
-  const [formState, setFormState] = useState(initialState);
+const AddUserForm = ({ onUserSave, formInitialState }: AddUserFormProps) => {
+  const [formState, setFormState] = useState(formInitialState || initialState);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -56,7 +61,7 @@ const AddUserForm = ({ onUserSave }: AddUserFormProps) => {
 
   return (
     <AddUserFormContainer>
-      <FormTitle>Add user</FormTitle>
+      <FormTitle>{formInitialState ? "Edit User" : "Add user"}</FormTitle>
 
       <InputField
         icon="person"
