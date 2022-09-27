@@ -9,23 +9,26 @@ export const LayoutContainer = styled.div`
 `;
 
 export const SidebarContainer = styled.div`
-  background-color: ${theme.colors.white};
+  background-color: ${theme.colors.sidebarBg};
   width: 20%;
-  border-left: 1px solid ${theme.colors.divider};
-  padding: 1rem;
 `;
 
 export const HeaderContainer = styled.div`
-  background-color: ${theme.colors.primary};
+  background-color: ${theme.colors.white};
+  color: ${theme.colors.primaryText};
   width: 100%;
   height: 4rem;
-  border-bottom: 1px solid ${theme.colors.divider};
   padding: 1rem;
+
+  box-shadow: 0 2px 2px -2px ${theme.colors.divider};
 `;
 
 export const ContentContainer = styled.div`
   background-color: ${theme.colors.bgColor};
   width: 80%;
+`;
+
+export const Content = styled.div`
   padding: 2rem;
 `;
 
@@ -33,7 +36,7 @@ export const MainViewContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  height: 90%;
+  height: 100%;
 `;
 
 export const FooterContainer = styled.div`
@@ -46,9 +49,9 @@ const Layout = () => {
   return (
     <>
       <LayoutContainer>
-        <HeaderContainer>header</HeaderContainer>
         <MainViewContainer>
           <SidebarContainer>sidebar</SidebarContainer>
+          <HeaderContainer>header</HeaderContainer>
           <ContentContainer>content</ContentContainer>
         </MainViewContainer>
         {/* <FooterContainer>footer</FooterContainer> */}

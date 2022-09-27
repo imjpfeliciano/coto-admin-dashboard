@@ -7,7 +7,8 @@ const BreadcumContainer = styled.div`
   flex-direction: row;
   align-items: center;
 
-  color: gray;
+  color: gray; // FIXME: Move color to theme
+  margin-bottom: 1rem;
 `;
 
 const BreadcumItem = styled.span`
@@ -15,7 +16,7 @@ const BreadcumItem = styled.span`
   cursor: pointer;
 
   &:not(:first-of-type) {
-    border-left: 2px solid gray;
+    border-left: 2px solid gray; // FIXME: Use color from theme
     padding-left: 1rem;
   }
 `;

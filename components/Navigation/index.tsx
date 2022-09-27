@@ -1,11 +1,13 @@
 import styled from "styled-components";
+import theme from "../../utils/theme";
 
 export const Navigation = styled.nav`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 
-  background-color: #000;
+  color: ${theme.colors.primaryText};
+  font-weight: bold;
 `;
 
 export const NavigationLinksContainer = styled.ul`
@@ -14,14 +16,17 @@ export const NavigationLinksContainer = styled.ul`
   }
 `;
 
-export const NavigationBrandContainer = styled.div`
-  color: white;
-`;
+export const NavigationBrandContainer = styled.div``;
 
 export const NavigationProfileContainer = styled.div`
-  color: white;
   display: flex;
   flex-direction: row;
+
+  & button {
+    &:not(:first-of-type) {
+      margin-left: 1rem;
+    }
+  }
 `;
 
 export const NavigationItem = styled.a`
@@ -29,7 +34,6 @@ export const NavigationItem = styled.a`
   display: inline-block;
   padding: 10px;
   text-decoration: none;
-  color: #fff;
   border: 0;
   border-radius: 5px;
   font-size: 1rem;

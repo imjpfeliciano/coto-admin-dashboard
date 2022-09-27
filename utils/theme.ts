@@ -12,6 +12,11 @@ const theme = {
 
     bgColor: "#F5F5F5",
     white: "#FFFFFF",
+
+    sidebarBg: "#303c4d",
+    sidebarItemHover: "#1f2937",
+    sidebarText: "#8093ad",
+    sidebarItemText: "#334155",
   },
 };
 
