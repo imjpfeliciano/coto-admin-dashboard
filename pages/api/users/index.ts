@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import Joi from "@hapi/joi";
 import { StatusCodes } from "http-status-codes";
 import User from "../../../controllers/User";
+import { paginationQuery } from "../../../types/request";
 
 const UserCreateSchema = Joi.object({
   name: Joi.string().required(),
@@ -10,8 +11,11 @@ const UserCreateSchema = Joi.object({
 });
 
 // /api/users
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { method, body: payload } = req;
+const handler = async (
+  req: NextApiRequest & paginationQuery,
+  res: NextApiResponse
+) => {
+  const { method, body: payload, query = {} } = req;
 
   switch (method) {
     case "POST":
@@ -33,8 +37,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       }
       res.status(StatusCodes.OK).json(newUser);
       break;
+
     case "GET":
-      const users = await User.getAll();
+      const users = await User.getAll(query);
       res.status(StatusCodes.OK).json(users);
       break;
     // FIXME: return message for invalid methods

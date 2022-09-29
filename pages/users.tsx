@@ -3,19 +3,19 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { IUser } from "../controllers/User";
 import UsersService from "../services/UserService";
-import Card, { CardTitle } from "../components/Card";
+import Card from "../components/Card";
 import UserRowItem from "../components/Tables/userRowItem";
 import {
   TableColumnNames,
   TableContainer,
-  TableHeader,
   TableHeaderContainer,
 } from "../components/Tables/Table";
 import { IconButton } from "../components/Button";
 import AddUserModal from "../components/Modals/AddUserModal";
-import Breadcum from "../components/Breadcum";
+import Paginator from "../components/Pagination";
 
-// TODO: Add pagination
+const DEFAULT_PAGE_SIZE = 1;
+
 // TODO: Add search
 // TODO: Add sorting
 // TODO: Add filtering
@@ -31,33 +31,37 @@ const GroupContent = styled.div`
   }
 `;
 
-const BreadcumsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  color: gray;
-`;
-
 export const getStaticProps = async () => {
   let users = [];
+  let count = 0;
   let error = null;
   try {
-    users = await UsersService.fetchUsers();
+    let { data, count: requestCount } = await UsersService.fetchUsers({
+      page: 1,
+      limit: DEFAULT_PAGE_SIZE,
+    });
+    users = data;
+    count = requestCount;
   } catch (error) {
     error = JSON.stringify(error);
   }
 
   return {
     props: {
-      users,
+      initialData: {
+        users,
+        count,
+      },
       error,
     },
   };
 };
 
 interface HomepageProps {
-  users: IUser[];
+  initialData: {
+    users: IUser[];
+    count: number;
+  };
 }
 
 const USER_STATES = {
@@ -65,15 +69,19 @@ const USER_STATES = {
   inactive: "Inactive",
 };
 
-const UserCreateForm = styled.div``;
-
 const UserList = styled.div``;
 
 // Users list page
-const UsersPage: NextPage<HomepageProps> = ({ users }) => {
+const UsersPage: NextPage<HomepageProps> = ({
+  initialData: { users, count },
+}) => {
   const [isUserModalOpen, setUserModalOpen] = useState(false);
   const [usersList, setUsers] = useState(users);
   const [reloadUsers, setReloadUsers] = useState(false);
+  const [activePage, setActivePage] = useState(1);
+  const [usersCount, setUsersCount] = useState(count);
+
+  // TODO: Move usersInitialData to a single state object
 
   // FIXME: Fix payload type definition
   const onSubmitUser = async (payload: any) => {
@@ -84,14 +92,21 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
   useEffect(() => {
     if (!reloadUsers) return;
 
+    console.log("Reloading users");
     const reloadData = async () => {
-      const users = await UsersService.fetchUsers();
-      setUsers(users);
+      const payload = {
+        page: activePage,
+        status: "active",
+        limit: DEFAULT_PAGE_SIZE,
+      };
+      const { data, count } = await UsersService.fetchUsers(payload);
+      setUsers(data);
+      setUsersCount(count);
       setReloadUsers(false);
     };
 
     reloadData();
-  }, [reloadUsers]);
+  }, [reloadUsers, activePage]);
 
   const onSoftDelete = async (id: string) => {
     await UsersService.update(id, {
@@ -114,12 +129,19 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
     setReloadUsers(true);
   };
 
+  const onUserPageChange = async (page: number) => {
+    console.log(`Changing page to ${page}`);
+    setActivePage(page);
+  };
+
+  useEffect(() => {
+    setReloadUsers(true);
+  }, [activePage]);
+
   /**
    * TODO:
    * Add filter to show only active users - default
    * Add filter to show only inactive users
-   * Add re-active user button
-   * Move Breadcunms to a separate component
    */
 
   return (
@@ -172,6 +194,13 @@ const UsersPage: NextPage<HomepageProps> = ({ users }) => {
               })}
             </tbody>
           </TableContainer>
+          <Paginator
+            // TODO: avoid sending current page as a prop
+            current={activePage}
+            total={usersCount}
+            pageSize={DEFAULT_PAGE_SIZE}
+            onItemClick={onUserPageChange}
+          />
         </UserList>
       </Card>
       <AddUserModal

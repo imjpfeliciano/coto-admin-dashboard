@@ -8,7 +8,7 @@ const Document = () => (
         rel="stylesheet"
       />
       <link
-        href="http://fonts.googleapis.com/css?family=Roboto,Montserrat"
+        href="http://fonts.googleapis.com/css?family=Montserrat"
         rel="stylesheet"
         type="text/css"
       />

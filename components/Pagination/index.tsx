@@ -1,78 +1,14 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import MaterialIcon from "../MaterialIcon";
+import {
+  PaginationContainer,
+  PaginationItem,
+  PageInput,
+  PageSpan,
+} from "./pagination.styled";
+import { PaginationProps, PagesListProps } from "./pagination.types";
 
-export interface PaginationItemProps {
-  active?: boolean;
-  onClick?: (page: number) => void;
-}
-
-export interface PaginationProps {
-  total: number;
-  pageSize: number;
-  current: number;
-  onItemClick: (page: number) => void;
-  maxPages?: number;
-}
-
-const PaginationContainer = styled.div`
-  font-family: "Montserrat";
-  display: flex;
-  flex-direction: row;
-
-  justify-content: center;
-  align-items: center;
-`;
-
-const PaginationItem = styled.div<PaginationItemProps>`
-  padding: 0.5rem;
-
-  ${(props) => props.active && "background-color: #eee;"}
-
-  &:hover {
-    cursor: pointer;
-    border-bottom: 2px solid #000;
-    background-color: #ddd;
-  }
-`;
-
-const PageInput = styled.input`
-  font-family: "Montserrat";
-  width: 32px;
-  height: 32px;
-  text-align: center;
-  border: 0;
-
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  &:focus,
-  &:active {
-    outline: none;
-  }
-`;
-
-const PageSpan = styled.span`
-  font-family: "Montserrat";
-  width: 32px;
-  height: 32px;
-`;
-
-interface PagesListProps {
-  pages: number;
-  current: number;
-  onItemClick: (page: number) => void;
-  maxPages?: number;
-}
-const PagesList = ({
-  pages,
-  current,
-  onItemClick,
-  maxPages = 5,
-}: PagesListProps) => {
+const PagesList = ({ pages, current, onItemClick }: PagesListProps) => {
   const [allowEdit, setAllowEdit] = useState(false);
   const [currentPage, setPage] = useState(current);
   const [activePage, setActivePage] = useState(current);
@@ -81,7 +17,9 @@ const PagesList = ({
     const newPage = event.target.value;
     const page = parseInt(newPage, 10);
 
-    setActivePage(page);
+    if (page > 0 && page <= pages) {
+      setActivePage(page);
+    }
   };
 
   const onChangePage = (page: number) => {

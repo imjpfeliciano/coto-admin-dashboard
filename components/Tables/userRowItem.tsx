@@ -8,7 +8,7 @@ import {
   Dropdown,
   DropdownItem,
   DropdownContainer,
-} from "./userRowItem.styles";
+} from "./userRowItem.styled";
 import moment from "moment";
 
 interface UserRowItemProps {
