@@ -9,9 +9,19 @@ const requestParams = {
   },
 };
 
+interface RequestParams {
+  [key: string]: any;
+}
+
 const RequestFactory = {
-  get: async (url: string) => {
-    const response = await fetch(`${BASE_URL}${url}`, {
+  get: async (url: string, params?: RequestParams) => {
+    let searchParams = "";
+
+    if (params) {
+      searchParams = `?${new URLSearchParams(params).toString()}`;
+    }
+
+    const response = await fetch(`${BASE_URL}${url}${searchParams}`, {
       ...requestParams,
     });
     return response.json();

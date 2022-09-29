@@ -1,5 +1,6 @@
 import monk from "monk";
 import { BaseUser } from "../controllers/User";
+import { UserPaginationQuery } from "../types/request";
 
 const DB_URI = process.env.MONGO_DB_URI || "localhost:27017";
 const db = monk(DB_URI);
@@ -19,10 +20,29 @@ const UserModel = {
     }
   },
 
-  getAll: async () => {
+  getAll: async (query: UserPaginationQuery) => {
     try {
-      const all = await users.find({});
-      return all;
+      let {
+        limit = 2,
+        page = 1,
+        status = "active",
+      }: UserPaginationQuery = query;
+      limit = Number(limit);
+      page = Number(page);
+
+      const skip = Number((page - 1) * limit);
+
+      const filters = {
+        active: status === "active",
+        deletedAt: { $exists: false },
+      };
+
+      const [data, count] = await Promise.all([
+        users.find(filters, { limit, skip }),
+        users.count(filters),
+      ]);
+
+      return { data, count };
     } catch (error) {
       return {
         error,

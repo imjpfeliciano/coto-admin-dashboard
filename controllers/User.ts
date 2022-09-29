@@ -23,6 +23,7 @@ export interface IUser extends BaseUser {
 }
 
 import UserModel from "../models/User";
+import { paginationQuery } from "../types/request";
 
 class User {
   constructor() {}
@@ -53,9 +54,9 @@ class User {
     }
   }
 
-  async getAll() {
+  async getAll(query: paginationQuery) {
     // TODO: Add error handling
-    const response = await UserModel.getAll();
+    const response = await UserModel.getAll(query);
     return response;
   }
 
