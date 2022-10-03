@@ -2,7 +2,7 @@ import { UserPaginationQuery } from "../types/request";
 import RequestFactory from "./RequestFactory";
 
 const UsersService = {
-  fetchUsers: async (payload: UserPaginationQuery) => {
+  fetchUsers: async (payload: UserPaginationQuery = {}) => {
     const users = await RequestFactory.get("/api/users", payload);
     return users;
   },
