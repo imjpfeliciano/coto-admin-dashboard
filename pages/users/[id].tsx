@@ -6,8 +6,8 @@ import { IUser } from "../../controllers/User";
 import UsersService from "../../services/UserService";
 
 export const getStaticPaths = async () => {
-  const users: IUser[] = await UsersService.fetchUsers();
-  const paths = users.map((user) => ({
+  const { data: users } = await UsersService.fetchUsers();
+  const paths = users.map((user: IUser) => ({
     params: { id: user._id.toString() },
   }));
 
