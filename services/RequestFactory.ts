@@ -1,3 +1,4 @@
+// NOTE: BASE_URL should point to staging env
 const BASE_URL = process.env.BASE_URL || "http://localhost:3000";
 
 const requestParams = {

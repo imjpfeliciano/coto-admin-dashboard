@@ -7,5 +7,6 @@ export default {
   component: Layout,
 } as ComponentMeta<typeof Layout>;
 
+// @ts-ignore
 const Template: ComponentStory<typeof Layout> = (args) => <Layout {...args} />;
 export const Primary = Template.bind({});

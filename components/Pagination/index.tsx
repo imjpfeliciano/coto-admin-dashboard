@@ -13,7 +13,7 @@ const PagesList = ({ pages, current, onItemClick }: PagesListProps) => {
   const [currentPage, setPage] = useState(current);
   const [activePage, setActivePage] = useState(current);
 
-  const onPageUpdated = (event) => {
+  const onPageUpdated = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPage = event.target.value;
     const page = parseInt(newPage, 10);
 

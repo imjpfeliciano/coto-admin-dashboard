@@ -2,9 +2,9 @@ import { UserPaginationQuery } from "../types/request";
 import RequestFactory from "./RequestFactory";
 
 const UsersService = {
-  fetchUsers: async (payload: UserPaginationQuery) => {
-    const users = await RequestFactory.get("/api/users", payload);
-    return users;
+  fetchUsers: async (payload: UserPaginationQuery = {}) => {
+    const response = await RequestFactory.get("/api/users", payload);
+    return response;
   },
 
   // TODO: add payload type definition
