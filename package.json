@@ -10,7 +10,8 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest --watch --env=jsdom",
-    "test:ci": "jest --ci --env=jsdom"
+    "test:ci": "jest --ci --env=jsdom",
+    "test:e2e": "playwright test --browser=chromium"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",
+    "@playwright/test": "^1.26.1",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-interactions": "^6.5.10",
