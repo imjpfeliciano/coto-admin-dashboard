@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Material Icon should render 1`] = `
+<div>
+  <span
+    class="MaterialIcon__IconContainer-sc-1s3bnun-0 fVqaYP material-icons"
+  >
+    add
+  </span>
+</div>
+`;
