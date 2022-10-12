@@ -13,12 +13,12 @@ import {
 import { IconButton } from "../components/Button";
 import AddUserModal from "../components/Modals/AddUserModal";
 import Paginator from "../components/Pagination";
+import ButtonDropdown from "../components/ButtonDropdown";
 
-const DEFAULT_PAGE_SIZE = 1;
+const DEFAULT_PAGE_SIZE = 15;
 
 // TODO: Add search
-// TODO: Add sorting
-// TODO: Add filtering
+// TODO: Add sorting by column (asc/desc) - check if this should happend in the backend or frontend (probably backend)
 // TODO: Add user deletion alert
 
 const GroupContent = styled.div`
@@ -28,6 +28,17 @@ const GroupContent = styled.div`
 
   h3 {
     color: black; // TODO: Move to theme
+  }
+`;
+
+const TableActions = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  /* FIXME: Validate all buttons have the same HTML container */
+  button {
+    margin-right: 0.5rem;
   }
 `;
 
@@ -67,7 +78,23 @@ interface HomepageProps {
 const USER_STATES = {
   active: "Active",
   inactive: "Inactive",
+  all: "All",
 };
+
+const TableFilters = [
+  {
+    label: "Active",
+    value: "active",
+  },
+  {
+    label: "Inactive",
+    value: "inactive",
+  },
+  {
+    label: "All",
+    value: "all",
+  },
+];
 
 const UserList = styled.div``;
 
@@ -80,6 +107,7 @@ const UsersPage: NextPage<HomepageProps> = ({
   const [reloadUsers, setReloadUsers] = useState(false);
   const [activePage, setActivePage] = useState(1);
   const [usersCount, setUsersCount] = useState(count);
+  const [userFilter, setUserFilter] = useState(USER_STATES.active);
 
   // TODO: Move usersInitialData to a single state object
 
@@ -96,7 +124,7 @@ const UsersPage: NextPage<HomepageProps> = ({
     const reloadData = async () => {
       const payload = {
         page: activePage,
-        status: "active",
+        status: userFilter,
         limit: DEFAULT_PAGE_SIZE,
       };
       const { data, count } = await UsersService.fetchUsers(payload);
@@ -106,7 +134,7 @@ const UsersPage: NextPage<HomepageProps> = ({
     };
 
     reloadData();
-  }, [reloadUsers, activePage]);
+  }, [reloadUsers, activePage, userFilter]);
 
   const onSoftDelete = async (id: string) => {
     await UsersService.update(id, {
@@ -138,25 +166,29 @@ const UsersPage: NextPage<HomepageProps> = ({
     setReloadUsers(true);
   }, [activePage]);
 
-  /**
-   * TODO:
-   * Add filter to show only active users - default
-   * Add filter to show only inactive users
-   */
-
   return (
     <>
       <Card>
         <UserList>
           <GroupContent>
             <h3>Users management</h3>
-            <div>
+            <TableActions>
               <IconButton
                 icon="add"
-                label="Add new user"
+                label="New user"
                 onClick={() => setUserModalOpen(true)}
               />
-            </div>
+              <ButtonDropdown
+                iconName="science"
+                label="Filter"
+                options={TableFilters}
+                onItemSelect={(value) => {
+                  console.log(`Selected ${value}`);
+                  setUserFilter(value);
+                  setReloadUsers(true);
+                }}
+              />
+            </TableActions>
           </GroupContent>
           <TableContainer>
             <TableHeaderContainer>
