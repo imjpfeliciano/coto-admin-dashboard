@@ -24,8 +24,8 @@ export const ButtonLabel = styled.span`
   margin-left: 0.5rem;
 `;
 
-export const DropdownMenu = styled.div<{ isOpen: boolean }>`
-  display: ${(props) => (props.isOpen ? "block" : "none")};
+export const DropdownMenu = styled.div`
+  display: block;
   position: absolute;
   top: 100%;
   left: 0;
