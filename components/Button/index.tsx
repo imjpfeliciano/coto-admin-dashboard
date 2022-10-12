@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import MaterialIcon from "../MaterialIcon";
 import theme from "../../utils/theme";
+import { BaseButton } from "./Button.styled";
 
 export const Button = styled.button``;
 
@@ -10,27 +11,14 @@ const ButtonText = styled.span`
 `;
 
 export const ButtonWithIcon = styled.button`
-  height: 36px;
-  background-color: ${theme.colors.bgColor};
-  cursor: pointer;
-  border-radius: 5px;
-  border: none;
-
-  padding: 1rem;
+  ${BaseButton}
 
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-weight: bold;
 
   &:hover {
-    background-color: gray;
-    opacity: 0.2;
-
     ${ButtonText} {
-      color: ${theme.colors.white};
-    }
-    .material-icons {
       color: ${theme.colors.white};
     }
   }

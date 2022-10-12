@@ -12,9 +12,19 @@ const IconContainer = styled.span`
   cursor: pointer;
 `;
 
-const MaterialIcon = ({ iconName, onClick, color }: iconProps) => {
+const MaterialIcon = ({
+  iconName,
+  onClick,
+  color,
+  ...otherProps
+}: iconProps) => {
   return (
-    <IconContainer className="material-icons" onClick={onClick} color={color}>
+    <IconContainer
+      className="material-icons"
+      onClick={onClick}
+      color={color}
+      {...otherProps}
+    >
       {iconName}
     </IconContainer>
   );

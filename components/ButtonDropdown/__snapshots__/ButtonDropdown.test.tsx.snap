@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonDropdown should render 1`] = `
+<div>
+  <div
+    class="ButtonDropdownstyled__DropdownContainer-sc-1ket5fv-0 bozSIJ"
+  >
+    <div
+      class="ButtonDropdownstyled__ButtonControl-sc-1ket5fv-1 ehNdEF"
+      data-testid="button-dropdown"
+    >
+      <div
+        class="ButtonDropdownstyled__ControlLabelContainer-sc-1ket5fv-2 gmvqdd"
+      >
+        <span
+          class="MaterialIcon__IconContainer-sc-1s3bnun-0 fVqaYP material-icons"
+          data-testid="material-icon"
+        >
+          science
+        </span>
+        <span
+          class="ButtonDropdownstyled__ButtonLabel-sc-1ket5fv-3 dgqcGq"
+        >
+          Test
+        </span>
+      </div>
+      <span
+        class="MaterialIcon__IconContainer-sc-1s3bnun-0 fVqaYP material-icons"
+      >
+        expand_more
+      </span>
+    </div>
+  </div>
+</div>
+`;

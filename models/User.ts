@@ -7,6 +7,11 @@ const db = monk(DB_URI);
 
 const users = db.get("users");
 
+interface UserFilters {
+  deletedAt?: { $exists: boolean };
+  active?: boolean;
+}
+
 const UserModel = {
   create: async (payload: BaseUser) => {
     try {
@@ -32,10 +37,13 @@ const UserModel = {
 
       const skip = Number((page - 1) * limit);
 
-      const filters = {
-        active: status === "active",
+      const filters: UserFilters = {
         deletedAt: { $exists: false },
       };
+
+      if (status !== "all") {
+        filters["active"] = status === "active";
+      }
 
       const [data, count] = await Promise.all([
         users.find(filters, { limit, skip }),
