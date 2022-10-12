@@ -33,9 +33,12 @@ const UserModel = {
       const skip = Number((page - 1) * limit);
 
       const filters = {
-        active: status === "active",
         deletedAt: { $exists: false },
       };
+
+      if (status !== "all") {
+        filters["active"] = status === "active";
+      }
 
       const [data, count] = await Promise.all([
         users.find(filters, { limit, skip }),
