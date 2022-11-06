@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import MaterialIcon from "../MaterialIcon";
 import {
   DropdownContainer,
@@ -17,8 +17,22 @@ const ButtonDropdown: React.FC<ButtonDropdownProps> = ({
   onItemSelect,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <DropdownContainer>
+    <DropdownContainer ref={ref}>
       <ButtonControl
         onClick={() => setIsOpen(!isOpen)}
         data-testid="button-dropdown"
