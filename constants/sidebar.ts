@@ -55,10 +55,37 @@ const financesRoutes = {
   ],
 };
 
-const SidebarRoutes: SidebarOption[] = [
-  userRoutes,
-  amenitiesRoutes,
-  financesRoutes,
-];
+// const SidebarRoutes: SidebarOption[] = [
+//   userRoutes,
+//   amenitiesRoutes,
+//   financesRoutes,
+// ];
 
+const SidebarRoutes = [
+  {
+    path: "/",
+    icon: "dashboard",
+    label: "Dashboard",
+  },
+  {
+    path: "/users",
+    icon: "group",
+    label: "Usuarios",
+  },
+  {
+    path: "/amenities",
+    icon: "forest",
+    label: "Amenidades",
+  },
+  {
+    path: "/finances",
+    icon: "account_balance",
+    label: "Finanzas",
+  },
+  {
+    path: "/messages",
+    icon: "message",
+    label: "Mensajes",
+  }
+]
 export default SidebarRoutes;

@@ -3,6 +3,7 @@ import { BaseUser } from "../controllers/User";
 import { UserPaginationQuery } from "../types/request";
 
 const DB_URI = process.env.MONGO_DB_URI || "localhost:27017";
+console.log({ DB_URI })
 const db = monk(DB_URI);
 
 const users = db.get("users");
