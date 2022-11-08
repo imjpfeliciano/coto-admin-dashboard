@@ -12,7 +12,7 @@ const UserRowItem = ({ _id, address, name, updatedAt, active }) => {
       <div className="flex flex-col">
         <div className="text-base font-bold">{name}</div>
         <div className="flex align-center">
-          <MaterialIcon iconName="home" color="gray" />
+          <MaterialIcon iconName="home" className="text-gray-500" />
           <span className="text-gray-500 text-sm">{address}</span>
         </div>
 

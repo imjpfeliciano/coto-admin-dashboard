@@ -3,11 +3,11 @@ import Link from "next/link";
 
 const SidebarItem = ({ path, icon, label }) => {
   return (
-    <li>
+    <li className="text-base font-normal text-neutral-100 dark:text-white hover:text-gray-500">
       <Link href={path}
         className="flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
-        <MaterialIcon iconName={icon} color="white" />
-        <span className="ml-3 text-base font-normal text-neutral-100 dark:text-white">{label}</span>
+        <MaterialIcon iconName={icon} />
+        <span className="ml-3">{label}</span>
       </Link>
     </li>
   )

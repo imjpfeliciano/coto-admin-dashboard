@@ -4,14 +4,14 @@ import theme from "../../utils/theme";
 interface IconProps {
   iconName: string;
   onClick?: () => void;
+  className?: string;
   color?: string;
 }
 
-const MaterialIcon: React.FC<IconProps> = ({ iconName, onClick, color }) => {
+const MaterialIcon: React.FC<IconProps> = ({ iconName, onClick, className }) => {
   // FIXME: hover colors
-  const classColor = color === "white" ? "text-white dark:text-black group-hover:text-gray-400" : `text-${color}-500  dark:text-${color}-400 group-hover:text-${color}-900`;
   return (
-    <span className={`material-icons w-6 h-6 ${classColor} transition duration-75  dark:group-hover:text-white`}>
+    <span className={`material-icons w-6 h-6 transition duration-75 ${className ? className : ""}`}>
       {iconName}
     </span>
   );
