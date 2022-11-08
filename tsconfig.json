@@ -26,10 +26,21 @@
   },
   "include": [
     "next-env.d.ts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "constants/**/*.ts",
+    "containers/**/*.ts",
+    "containers/**/*.tsx",
+    "models/**/*.ts",
+    "pages/**/*.ts",
+    "pages/**/*.tsx",
+    "services/**/*.ts",
+    "utils/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
     "jest.config.ts",
-    "components/MaterialIcon/MaterialIcon.test.tsx",
     ".next/types/**/*.ts"
   ],
   "exclude": [

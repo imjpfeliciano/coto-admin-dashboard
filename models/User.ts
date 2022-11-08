@@ -29,7 +29,7 @@ const UserModel = {
   getAll: async (query: UserPaginationQuery) => {
     try {
       let {
-        limit = 2,
+        limit = 100,
         page = 1,
         status = "active",
       }: UserPaginationQuery = query;

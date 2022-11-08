@@ -1,19 +1,15 @@
-export interface BaseUser {
+export interface UserRequest {
   name: string;
+  lastname: string;
   email: string; // When adding a new user, this field is required to be unique
   address: string; // Internal address
-
+}
+export interface BaseUser extends UserRequest {
   scopes: string[]; // ["user", "admin"]
   createdAt: string;
   updatedAt: string;
   deletedAt?: string;
   active: boolean;
-}
-
-export interface UserRequest {
-  name: string;
-  email: string;
-  address: string;
 }
 
 export interface IUser extends BaseUser {
@@ -26,7 +22,7 @@ import UserModel from "../models/User";
 import { paginationQuery } from "../types/request";
 
 class User {
-  constructor() {}
+  constructor() { }
 
   async create(payload: UserRequest) {
     const createdAt = new Date().toISOString();

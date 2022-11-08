@@ -61,7 +61,13 @@ const financesRoutes = {
 //   financesRoutes,
 // ];
 
-const SidebarRoutes = [
+export interface SidebarItemProps {
+  icon: string;
+  label: string;
+  path: string;
+}
+
+const SidebarRoutes: SidebarItemProps[] = [
   {
     path: "/",
     icon: "dashboard",

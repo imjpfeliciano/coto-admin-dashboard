@@ -1,7 +1,7 @@
-import { ContentContainer, HeaderContainer, LayoutContainer, MainViewContainer, SidebarContainer } from "../components/Layout"
 import SidebarRoutes from "../constants/sidebar"
 import Sidebar from "../components/V2/Sidebar"
 import Navbar from "../components/V2/Navbar";
+import "../styles/globals.css";
 
 const SIDEBAR_ROUTES = SidebarRoutes;
 
@@ -35,9 +35,6 @@ export default function RootLayout({
           </div>
 
         </div>
-
-
-        <script src="https://cdn.tailwindcss.com" async />
       </body>
     </html>
   )

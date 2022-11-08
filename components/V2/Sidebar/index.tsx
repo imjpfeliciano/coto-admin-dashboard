@@ -1,7 +1,8 @@
-import MaterialIcon from "../../MaterialIcon";
 import Link from "next/link";
+import { SidebarItemProps } from "../../../constants/sidebar";
+import MaterialIcon from "../../MaterialIcon";
 
-const SidebarItem = ({ path, icon, label }) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({ path, icon, label }) => {
   return (
     <li className="text-base font-normal text-neutral-100 dark:text-white hover:text-gray-500">
       <Link href={path}
@@ -13,13 +14,17 @@ const SidebarItem = ({ path, icon, label }) => {
   )
 }
 
-const Sidebar = ({ options }) => {
+interface SidebarProps {
+  options: SidebarItemProps[];
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ options }) => {
   return (
     <aside className="w-1/4 h-screen px-3 py-4 overflow-y-auto bg-slate-700 dark:bg-sky-800">
       <div className="">
         <ul className="space-y-2">
           {options.map((option) => (
-            <SidebarItem key={option.title} {...option} />
+            <SidebarItem key={option.label} {...option} />
           ))}
         </ul>
       </div>
