@@ -29,7 +29,7 @@ const UserModel = {
   getAll: async (query: UserPaginationQuery) => {
     try {
       let {
-        limit = 100,
+        limit = 12,
         page = 1,
         status = "active",
       }: UserPaginationQuery = query;
@@ -47,7 +47,7 @@ const UserModel = {
       }
 
       const [data, count] = await Promise.all([
-        users.find(filters, { limit, skip }),
+        users.find(filters, { limit, skip, sort: { createdAt: -1 } }),
         users.count(filters),
       ]);
 

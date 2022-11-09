@@ -8,14 +8,14 @@ import UsersLoading from "../loading";
 
 const fetchUsers = async () => {
   const res = await fetch("http://localhost:3000/api/users");
-  const { data } = await res.json();
+  const { data, count } = await res.json();
 
-  return data;
+  return [data, count];
 };
 
 
 const UsersPage = async () => {
-  const users: IUser[] = await fetchUsers();
+  const [users, count] = await fetchUsers();
 
   return (
     <Suspense fallback={<UsersLoading />}>
@@ -27,9 +27,11 @@ const UsersPage = async () => {
             Agregar
           </Link>
         </div>
-
-        {users.map((user) => <UserRowItem key={user._id} {...user} />)}
+        {users.map((user: IUser) => <UserRowItem key={user._id} {...user} />)}
       </Card>
+
+      {/* TODO: Implement new paginator */}
+      <span className="flex w-1/2 m-auto align-center justify-center items-center">{count}</span>
     </Suspense>
 
   );
