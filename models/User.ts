@@ -1,4 +1,5 @@
 import monk from "monk";
+import { DEFAULT_PAGE_LIMIT } from "../constants/paginator";
 import { BaseUser } from "../controllers/User";
 import { UserPaginationQuery } from "../types/request";
 
@@ -29,7 +30,7 @@ const UserModel = {
   getAll: async (query: UserPaginationQuery) => {
     try {
       let {
-        limit = 12,
+        limit = DEFAULT_PAGE_LIMIT,
         page = 1,
         status = "active",
       }: UserPaginationQuery = query;
