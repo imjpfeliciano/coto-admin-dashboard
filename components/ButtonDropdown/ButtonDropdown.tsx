@@ -1,12 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MaterialIcon from "../MaterialIcon";
 import {
-  DropdownContainer,
-  ButtonControl,
-  DropdownMenu,
-  DropdownItem,
-  ControlLabelContainer,
-  ButtonLabel,
+  ButtonControl, ButtonLabel, ControlLabelContainer, DropdownContainer, DropdownItem, DropdownMenu
 } from "./ButtonDropdown.styled";
 import { ButtonDropdownProps } from "./ButtonDropdown.types";
 
@@ -17,10 +12,11 @@ const ButtonDropdown: React.FC<ButtonDropdownProps> = ({
   onItemSelect,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const ref = useRef();
+  const ref = useRef<HTMLElement>();
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    // FIXME: Check type definition for the event
+    const handleClickOutside = (event: any) => {
       if (ref.current && !ref.current.contains(event.target)) {
         setIsOpen(false);
       }
@@ -32,6 +28,7 @@ const ButtonDropdown: React.FC<ButtonDropdownProps> = ({
   }, []);
 
   return (
+    // @ts-ignore
     <DropdownContainer ref={ref}>
       <ButtonControl
         onClick={() => setIsOpen(!isOpen)}

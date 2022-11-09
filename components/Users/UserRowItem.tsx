@@ -1,11 +1,10 @@
 import Link from 'next/link';
-import moment from 'moment';
-import MaterialIcon from '../MaterialIcon';
 import { IUser } from '../../types/user';
+import { getTimeFromNow } from '../../utils/date';
+import MaterialIcon from '../MaterialIcon';
 
 const UserRowItem: React.FC<IUser> = ({ _id, address, name, updatedAt, active }) => {
-  let lastUpdated = new Date(updatedAt).toDateString();
-  lastUpdated = moment(moment(lastUpdated).local()).fromNow()
+  const lastUpdated = getTimeFromNow(updatedAt);
 
   const statusColor = active ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600';
 
@@ -17,17 +16,19 @@ const UserRowItem: React.FC<IUser> = ({ _id, address, name, updatedAt, active })
           <MaterialIcon iconName="home" className="text-gray-500" />
           <span className="ml-2 text-gray-500 text-sm">{address}</span>
         </div>
-
       </div>
+
       <div className="flex flex-col">
         <div>
           <span>Modificado: </span>
           <span>{lastUpdated}</span>
         </div>
-        <div className={`w-max ${statusColor} rounded px-2`}>{active ? 'Activo' : 'Inactivo'}</div>
+        <div className="flex justify-end">
+          <div className={`w-max ${statusColor} rounded px-2`}>{active ? 'Activo' : 'Inactivo'}</div>
+        </div>
       </div>
     </Link>
-  )
-}
+  );
+};
 
 export default UserRowItem;

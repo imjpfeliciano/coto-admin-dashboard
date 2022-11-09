@@ -9,6 +9,7 @@ import UsersLoading from "./loading";
 import { DEFAULT_PAGE_LIMIT } from "../../constants/paginator";
 
 const fetchUsers = async (page: number) => {
+  // FIXME: Load base endpoint from env
   const res = await fetch(`http://localhost:3000/api/users?page=${page}`);
   const { data, count } = await res.json();
 

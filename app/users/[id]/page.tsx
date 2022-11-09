@@ -8,7 +8,11 @@ const fetchUserDetails = async (id: string) => {
   return user;
 };
 
-const ProfilePage = async ({ params }) => {
+interface ProfilePageProps {
+  params: any;
+}
+
+const ProfilePage = async ({ params }: ProfilePageProps) => {
   const { id } = params;
   const user = await fetchUserDetails(id);
   const { name } = user;
