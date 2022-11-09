@@ -1,6 +1,6 @@
 import ContentLoader from "react-content-loader";
 
-const LoadingProfile = (props) => {
+const LoadingProfile = () => {
   return (
     <ContentLoader
       height={300}
@@ -8,7 +8,6 @@ const LoadingProfile = (props) => {
       viewBox="0 0 450 300"
       backgroundColor="#f5f5f5"
       foregroundColor="#dbdbdb"
-      {...props}
     >
       <circle cx="75" cy="75" r="70" />
       <rect x="160" y="15" rx="3" ry="3" width="50" height="15" />

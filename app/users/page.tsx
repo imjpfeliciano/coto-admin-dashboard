@@ -35,7 +35,7 @@ const UsersPage = () => {
   const upperBound = (activePage * DEFAULT_PAGE_LIMIT) > count ? count : (activePage * DEFAULT_PAGE_LIMIT);
 
   return (
-    <Suspense fallback={<UsersLoading />}>
+    <>
       <Card>
         <div className="pb-2 mb-2 border-b-2 flex flex-row justify-between align-center">
           <h1 className="text-xl font-bold">Lista de Usuarios</h1>
@@ -44,7 +44,10 @@ const UsersPage = () => {
             Agregar
           </Link>
         </div>
-        {users.map((user: IUser) => <UserRowItem key={user._id} {...user} />)}
+        <Suspense fallback={<UsersLoading />}>
+          {users.map((user: IUser) => <UserRowItem key={user._id} {...user} />)}
+
+        </Suspense>
       </Card>
 
       <div
@@ -73,8 +76,7 @@ const UsersPage = () => {
         </div>
       </div>
 
-    </Suspense>
-
+    </>
   );
 }
 
