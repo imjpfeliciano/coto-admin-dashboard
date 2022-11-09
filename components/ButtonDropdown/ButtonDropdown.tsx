@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import MaterialIcon from "../MaterialIcon";
+import React, { useEffect, useRef, useState } from 'react';
+import MaterialIcon from '../MaterialIcon';
 import {
   ButtonControl, ButtonLabel, ControlLabelContainer, DropdownContainer, DropdownItem, DropdownMenu
-} from "./ButtonDropdown.styled";
-import { ButtonDropdownProps } from "./ButtonDropdown.types";
+} from './ButtonDropdown.styled';
+import { ButtonDropdownProps } from './ButtonDropdown.types';
 
 const ButtonDropdown: React.FC<ButtonDropdownProps> = ({
   label,
@@ -21,9 +21,9 @@ const ButtonDropdown: React.FC<ButtonDropdownProps> = ({
         setIsOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 

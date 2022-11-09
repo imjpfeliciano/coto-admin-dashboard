@@ -1,15 +1,15 @@
-import { UserPaginationQuery } from "../types/request";
-import RequestFactory from "./RequestFactory";
+import { UserPaginationQuery } from '../types/request';
+import RequestFactory from './RequestFactory';
 
 const UsersService = {
   fetchUsers: async (payload: UserPaginationQuery = {}) => {
-    const response = await RequestFactory.get("/api/users", payload);
+    const response = await RequestFactory.get('/api/users', payload);
     return response;
   },
 
   // TODO: add payload type definition
   createUser: async (payload: any) => {
-    const newUser = await RequestFactory.post("/api/users", payload);
+    const newUser = await RequestFactory.post('/api/users', payload);
     return newUser;
   },
 

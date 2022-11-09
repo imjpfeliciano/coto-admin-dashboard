@@ -1,12 +1,12 @@
-"use client"
-import React, { Suspense, useState, useEffect } from "react";
-import Link from "next/link";
-import Card from "../../components/Card";
-import MaterialIcon from "../../components/MaterialIcon";
-import UserRowItem from "../../components/Users/UserRowItem";
-import { IUser } from "../../types/user";
-import UsersLoading from "./loading";
-import { DEFAULT_PAGE_LIMIT } from "../../constants/paginator";
+'use client';
+import Link from 'next/link';
+import { Suspense, useEffect, useState } from 'react';
+import Card from '../../components/Card';
+import MaterialIcon from '../../components/MaterialIcon';
+import UserRowItem from '../../components/Users/UserRowItem';
+import { DEFAULT_PAGE_LIMIT } from '../../constants/paginator';
+import { IUser } from '../../types/user';
+import UsersLoading from './loading';
 
 const fetchUsers = async (page: number) => {
   // FIXME: Load base endpoint from env
@@ -29,12 +29,13 @@ const UsersPage = () => {
     };
 
     fetch();
-  }, [activePage])
+  }, [activePage]);
 
   const lastPage = Math.ceil(count / DEFAULT_PAGE_LIMIT);
   const lowerBound = (activePage - 1) * DEFAULT_PAGE_LIMIT + 1;
   const upperBound = (activePage * DEFAULT_PAGE_LIMIT) > count ? count : (activePage * DEFAULT_PAGE_LIMIT);
 
+  // TODO: Add filters (active, inactive, all)
   return (
     <>
       <Card>
@@ -79,6 +80,6 @@ const UsersPage = () => {
 
     </>
   );
-}
+};
 
 export default UsersPage;

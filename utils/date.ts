@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment from 'moment';
 
 export const getTimeFromNow = (date: string) => {
   const time = moment(date).fromNow();

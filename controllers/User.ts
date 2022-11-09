@@ -18,8 +18,8 @@ export interface IUser extends BaseUser {
   // TODO: Validate if we want to add vehicles to the user model
 }
 
-import UserModel from "../models/User";
-import { paginationQuery } from "../types/request";
+import UserModel from '../models/User';
+import { paginationQuery } from '../types/request';
 
 class User {
   constructor() { }
@@ -27,7 +27,7 @@ class User {
   async create(payload: UserRequest) {
     const createdAt = new Date().toISOString();
     const updatedAt = new Date().toISOString();
-    const scopes = ["user"];
+    const scopes = ['user'];
 
     const newUser = {
       ...payload,

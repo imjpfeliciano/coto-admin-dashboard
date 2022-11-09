@@ -1,5 +1,5 @@
-import Link from "next/link";
-import MaterialIcon from "../../MaterialIcon";
+import Link from 'next/link';
+import MaterialIcon from '../../MaterialIcon';
 
 const Navbar = () => {
   return (
@@ -12,6 +12,6 @@ const Navbar = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Navbar;

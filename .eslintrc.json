@@ -16,11 +16,21 @@
         "ignoreRegExpLiterals": true
       }
     ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "react/jsx-first-prop-new-line": [
+      "error",
+      "multiline"
+    ],
     "react/jsx-max-props-per-line": [
       "error",
       {
-        "maximum": 1,
-        "when": "multiline"
+        "maximum": {
+          "single": 2,
+          "multi": 1
+        }
       }
     ],
     "semi": [
