@@ -1,10 +1,9 @@
-import styled from "styled-components";
-import { Button, IconButton } from "../components/Button";
+import { IconButton } from '../components/Button';
 import {
   Navigation,
   NavigationBrandContainer,
-  NavigationProfileContainer,
-} from "../components/Navigation";
+  NavigationProfileContainer
+} from '../components/Navigation';
 
 const Navbar = () => {
   return (
@@ -14,10 +13,10 @@ const Navbar = () => {
         <IconButton
           icon="account_circle"
           label="Jhon Doe"
-          onClick={() => {}}
+          onClick={() => { }}
           withCaret
         />
-        <IconButton icon="notifications" onClick={() => {}} />
+        <IconButton icon="notifications" onClick={() => { }} />
       </NavigationProfileContainer>
     </Navigation>
   );

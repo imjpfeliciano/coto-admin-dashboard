@@ -1,20 +1,17 @@
-"use client";
-import Link from "next/link";
-import styled from "styled-components";
-import React, { useEffect, useState } from "react";
+'use client';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import MaterialIcon from '../components/MaterialIcon';
 import {
-  ItemCaret,
-  ItemTitle,
+  AnchorContainer,
+  CaretContainer, ItemTitle,
   SidebarGroupContainer,
   SidebarGroupTitle,
   SidebarItemContainer,
   SidebarOptionsContainer,
-  SubItemContainer,
-  AnchorContainer,
-  CaretContainer,
-} from "../components/Sidebar";
-import MaterialIcon from "../components/MaterialIcon";
-import theme from "../utils/theme";
+  SubItemContainer
+} from '../components/Sidebar';
+import theme from '../utils/theme';
 
 interface SidebarBaseItem {
   icon: string; // FIXME: should be an icon component
@@ -39,7 +36,7 @@ export interface SidebarProps {
 const SidebarItem = ({
   icon,
   label,
-  path = "#",
+  path = '#',
   subItems,
   active,
 }: SidebarItem) => {
@@ -62,14 +59,14 @@ const SidebarItem = ({
       <Container>
         <SidebarItemContainer
           onClick={handleClick}
-          className={`${(open || active) && "active"}`}
+          className={`${(open || active) && 'active'}`}
         >
           <MaterialIcon iconName={icon} color={theme.colors.sidebarText} />
           <ItemTitle>{label}</ItemTitle>
           {subItems && (
             <CaretContainer>
               <MaterialIcon
-                iconName={open ? "expand_less" : "expand_more"}
+                iconName={open ? 'expand_less' : 'expand_more'}
                 color={theme.colors.sidebarText}
               />
             </CaretContainer>

@@ -1,54 +1,53 @@
-import { SidebarOption } from "../containers/Sidebar";
 
 // For icons, see https://fonts.google.com/icons
 const userRoutes = {
-  title: "Usuarios",
-  items: [{ icon: "group", label: "Listado", path: "/users" }],
+  title: 'Usuarios',
+  items: [{ icon: 'group', label: 'Listado', path: '/users' }],
 };
 
 const amenitiesRoutes = {
-  title: "Amenidades",
+  title: 'Amenidades',
   items: [
     {
-      icon: "forest",
-      label: "Listado",
-      path: "/amenities",
+      icon: 'forest',
+      label: 'Listado',
+      path: '/amenities',
     },
   ],
 };
 
 const financesRoutes = {
-  title: "Finanzas",
+  title: 'Finanzas',
   items: [
     {
-      icon: "account_balance",
-      label: "Ingresos",
+      icon: 'account_balance',
+      label: 'Ingresos',
       subItems: [
         {
-          icon: "build",
-          label: "Mantenimiento",
-          path: "/finances/incomes/maintenance",
+          icon: 'build',
+          label: 'Mantenimiento',
+          path: '/finances/incomes/maintenance',
         },
         {
-          icon: "local_atm",
-          label: "Multas",
-          path: "/finances/incomes/fines",
+          icon: 'local_atm',
+          label: 'Multas',
+          path: '/finances/incomes/fines',
         },
       ],
     },
     {
-      icon: "paid",
-      label: "Egresos",
+      icon: 'paid',
+      label: 'Egresos',
       subItems: [
         {
-          icon: "cleaning_services",
-          label: "Pago de servicios",
-          path: "/finances/outcomes/services",
+          icon: 'cleaning_services',
+          label: 'Pago de servicios',
+          path: '/finances/outcomes/services',
         },
         {
-          icon: "local_shipping",
-          label: "Pago de proveedores",
-          path: "/finances/outcomes/providers",
+          icon: 'local_shipping',
+          label: 'Pago de proveedores',
+          path: '/finances/outcomes/providers',
         },
       ],
     },
@@ -69,29 +68,29 @@ export interface SidebarItemProps {
 
 const SidebarRoutes: SidebarItemProps[] = [
   {
-    path: "/",
-    icon: "dashboard",
-    label: "Dashboard",
+    path: '/',
+    icon: 'dashboard',
+    label: 'Dashboard',
   },
   {
-    path: "/users",
-    icon: "group",
-    label: "Usuarios",
+    path: '/users',
+    icon: 'group',
+    label: 'Usuarios',
   },
   {
-    path: "/amenities",
-    icon: "forest",
-    label: "Amenidades",
+    path: '/amenities',
+    icon: 'forest',
+    label: 'Amenidades',
   },
   {
-    path: "/finances",
-    icon: "account_balance",
-    label: "Finanzas",
+    path: '/finances',
+    icon: 'account_balance',
+    label: 'Finanzas',
   },
   {
-    path: "/messages",
-    icon: "message",
-    label: "Mensajes",
+    path: '/messages',
+    icon: 'message',
+    label: 'Mensajes',
   }
-]
+];
 export default SidebarRoutes;

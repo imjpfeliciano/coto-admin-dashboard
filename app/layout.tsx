@@ -1,15 +1,12 @@
-import SidebarRoutes from "../constants/sidebar"
-import Sidebar from "../components/V2/Sidebar"
-import Navbar from "../components/V2/Navbar";
-import "../styles/globals.css";
+import AppContainer from '../containers/AppContainer';
+import AppSessionProvider from './SessionProvider';
+interface Props {
+  children: React.ReactNode;
+  session?: any;
+}
 
-const SIDEBAR_ROUTES = SidebarRoutes;
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+const RootLayout = ({ children, session }: Props) => {
+  console.log({ session });
   return (
     <html>
       <head>
@@ -24,18 +21,12 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <div className="h-full flex flex-row">
-          <Sidebar options={SIDEBAR_ROUTES} />
-          <div className="flex flex-col w-3/4">
-            <Navbar />
-            <div className="p-4 bg-slate-200 h-full">
-              {children}
-            </div>
-
-          </div>
-
-        </div>
+        <AppSessionProvider session={session}>
+          <AppContainer>{children}</AppContainer>
+        </AppSessionProvider>
       </body>
     </html>
-  )
-}
+  );
+};
+
+export default RootLayout;

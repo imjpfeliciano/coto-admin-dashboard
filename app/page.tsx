@@ -1,8 +1,14 @@
-// Get /
-export default function Page() {
+'use client';
+interface Props {
+  children: React.ReactNode;
+}
+
+const Page = ({ children }: Props) => {
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <div className='flex'>
+      Home Page
     </div>
   );
-}
+};
+
+export default Page;
