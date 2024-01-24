@@ -21,7 +21,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ options }) => {
   return (
-    <aside className="w-1/4 h-screen px-3 py-4 overflow-y-auto bg-slate-700 dark:bg-sky-800">
+    <aside className="w-[250px] h-screen px-3 py-4 overflow-y-auto bg-slate-700 dark:bg-sky-800">
       <div className="">
         <ul className="space-y-2">
           {options.map((option) => (

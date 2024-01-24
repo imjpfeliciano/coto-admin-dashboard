@@ -1,16 +1,16 @@
 'use client';
 import Link from 'next/link';
 import { Suspense, useEffect, useState } from 'react';
-import Card from '../../components/Card';
-import MaterialIcon from '../../components/MaterialIcon';
-import UserRowItem from '../../components/Users/UserRowItem';
-import { DEFAULT_PAGE_LIMIT } from '../../constants/paginator';
-import { IUser } from '../../types/user';
+import Card from '../../../components/Card';
+import MaterialIcon from '../../../components/MaterialIcon';
+import UserRowItem from '../../../components/Users/UserRowItem';
+import { DEFAULT_PAGE_LIMIT } from '../../../constants/paginator';
+import { IUser } from '../../../types/user';
 import UsersLoading from './loading';
 
 const fetchUsers = async (page: number) => {
   // FIXME: Load base endpoint from env
-  const res = await fetch(`http://localhost:3000/api/users?page=${page}`);
+  const res = await fetch(`https://localhost:3000/api/users?page=${page}`);
   const { data, count } = await res.json();
 
   return [data, count];
@@ -41,7 +41,7 @@ const UsersPage = () => {
       <Card>
         <div className="pb-2 mb-2 border-b-2 flex flex-row justify-between align-center">
           <h1 className="text-xl font-bold">Lista de Usuarios</h1>
-          <Link href="/users/add" className="flex justify-center align-center bg-purple-600 rounded-full px-4 py-1 hover:bg-purple-500 text-white">
+          <Link href="/dashboard/users/add" className="flex justify-center align-center bg-purple-600 rounded-full px-4 py-1 hover:bg-purple-500 text-white">
             <MaterialIcon iconName="add" color="white" />
             Agregar
           </Link>

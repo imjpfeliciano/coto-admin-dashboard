@@ -1,10 +1,10 @@
 'use client';
 import Link from 'next/link';
 import { Suspense, useEffect, useState } from 'react';
-import Card from '../../../components/Card';
-import MaterialIcon from '../../../components/MaterialIcon';
-import UserForm from '../../../components/Users/Form';
-import { BaseUserRequest } from '../../../types/user';
+import Card from '../../../../components/Card';
+import MaterialIcon from '../../../../components/MaterialIcon';
+import UserForm from '../../../../components/Users/Form';
+import { BaseUserRequest } from '../../../../types/user';
 import LoadingProfile from './loading';
 
 const fetchUserDetails = async (id: string) => {

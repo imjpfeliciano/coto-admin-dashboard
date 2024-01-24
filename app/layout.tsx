@@ -1,5 +1,5 @@
-import AppContainer from '../containers/AppContainer';
-import AppSessionProvider from './SessionProvider';
+import './globals.css';
+
 interface Props {
   children: React.ReactNode;
   session?: any;
@@ -15,15 +15,13 @@ const RootLayout = ({ children, session }: Props) => {
           rel="stylesheet"
         />
         <link
-          href="http://fonts.googleapis.com/css?family=Montserrat"
+          href="https://fonts.googleapis.com/css?family=Montserrat"
           rel="stylesheet"
           type="text/css"
         />
       </head>
       <body>
-        <AppSessionProvider session={session}>
-          <AppContainer>{children}</AppContainer>
-        </AppSessionProvider>
+    {children}
       </body>
     </html>
   );

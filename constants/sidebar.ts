@@ -68,29 +68,29 @@ export interface SidebarItemProps {
 
 const SidebarRoutes: SidebarItemProps[] = [
   {
-    path: '/',
+    path: '/dashboard',
     icon: 'dashboard',
     label: 'Dashboard',
   },
   {
-    path: '/users',
+    path: '/dashboard/users',
     icon: 'group',
     label: 'Usuarios',
   },
   {
-    path: '/amenities',
+    path: '/dashboard/amenities',
     icon: 'forest',
     label: 'Amenidades',
   },
   {
-    path: '/finances',
+    path: '/dashboard/finances',
     icon: 'account_balance',
     label: 'Finanzas',
   },
-  {
-    path: '/messages',
-    icon: 'message',
-    label: 'Mensajes',
-  }
+  // {
+  //   path: '/dashboard/messages',
+  //   icon: 'message',
+  //   label: 'Mensajes',
+  // }
 ];
 export default SidebarRoutes;

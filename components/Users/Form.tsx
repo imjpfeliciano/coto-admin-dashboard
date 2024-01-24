@@ -10,6 +10,8 @@ interface UserFormProps {
   userId?: string;
 }
 
+const USERS_DASHBOARD_PAGE = '/dashboard/users';
+
 const initialState: BaseUserRequest = {
   name: '',
   lastname: '',
@@ -34,7 +36,7 @@ const UserForm: React.FC<UserFormProps> = ({ newUser, userId }) => {
     const user = await UsersService.createUser(formState);
 
     if (user) {
-      window.location.pathname = '/users';
+      window.location.pathname = USERS_DASHBOARD_PAGE;
     }
   };
 
@@ -48,7 +50,7 @@ const UserForm: React.FC<UserFormProps> = ({ newUser, userId }) => {
     // Soft delete
     const deleted = await UsersService.update(userId, { active: false });
     if (deleted) {
-      window.location.pathname = '/users';
+      window.location.pathname = USERS_DASHBOARD_PAGE;
     }
     // TODO: Redirect to /users and send alert the user was deleted
   };

@@ -1,4 +1,4 @@
-import { WithChildren } from '../../../types/components';
+import { WithChildren } from '../../../../types/components';
 
 const ProfileLayout: React.FC<WithChildren> = ({ children }) => {
   return (
