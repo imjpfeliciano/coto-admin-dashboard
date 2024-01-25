@@ -1,13 +1,13 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import User from '../../../../../controllers/User';
-import { StatusCodes } from 'http-status-codes';
 
 const INVALID_USER_ID_MESSAGE = 'Invalid user id';
 
-export const GET = async (
-  req: Request,
-  { params }: { params: { id: string } }
-) => {
+interface UserDetailRequest {
+  params: {
+    id: string;
+  };
+}
+export const GET = async (req: Request, { params }: UserDetailRequest) => {
   try {
     const userId = params.id;
     const user = await User.get(String(userId));
@@ -24,26 +24,35 @@ export const GET = async (
   }
 };
 
-export const PUT = async (req: NextApiRequest, res: NextApiResponse) => {
+export const PUT = async (req: Request, { params }: UserDetailRequest) => {
   try {
-    const { id } = req.query;
-    const user = await User.update(String(id), req.body);
-    return res.status(StatusCodes.OK).json({ ...user, age: 30 });
+    const userId = params.id;
+    const payload = await req.json();
+    const user = await User.update(String(userId), payload);
+    return Response.json({
+      success: true,
+      user,
+    });
   } catch (error) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ message: INVALID_USER_ID_MESSAGE });
+    return Response.json({
+      success: false,
+      message: INVALID_USER_ID_MESSAGE,
+    });
   }
 };
 
-export const DELETE = async (req: NextApiRequest, res: NextApiResponse) => {
+export const DELETE = async (req: Request, { params }: UserDetailRequest) => {
   try {
-    const { id } = req.query;
-    const status = await User.delete(String(id));
-    return res.status(StatusCodes.OK).json({ success: status });
+    const userId = params.id;
+    const status = await User.delete(String(userId));
+    return Response.json({
+      success: true,
+      status,
+    });
   } catch (error) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ message: INVALID_USER_ID_MESSAGE });
+    return Response.json({
+      success: false,
+      message: INVALID_USER_ID_MESSAGE,
+    });
   }
 };

@@ -68,15 +68,12 @@ const UserFormActionButtons: React.FC<UserFormActionButtonsProps> = ({ isNewUser
 
 interface UserResponse {
   success: boolean,
+  message?: string,
   user?: BaseUserRequest
 };
 
 const UserForm: React.FC<UserFormProps> = ({ newUser, userId, user }) => {
   const router = useRouter()
-
-  console.log('Mounting form', { user, newUser })
-  const initialUserState = user !== null && !newUser ? 'user' : 'new';
-  console.log({ initialUserState })
   const [formState, setFormState] = useState<UserFormType>((user != null) && !newUser ? user : initialState)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,9 +87,8 @@ const UserForm: React.FC<UserFormProps> = ({ newUser, userId, user }) => {
   }
 
   const handleCreate = async (): Promise<void> => {
-    console.log('Create user', formState)
     const user: UserResponse = await UsersService.createUser(formState)
-    console.log({ created: user })
+
     if (user?.success) {
       router.push(USERS_DASHBOARD_PAGE)
     }
@@ -103,20 +99,20 @@ const UserForm: React.FC<UserFormProps> = ({ newUser, userId, user }) => {
       return
     }
     // Soft delete
-    const deleted = await UsersService.update(userId, { active: false })
-    if (deleted !== null) {
+    const deleted: UserResponse = await UsersService.update(userId, { active: false })
+    if (deleted.success) {
       router.push(USERS_DASHBOARD_PAGE)
+      // TODO: Redirect to /users and send alert the user was deleted
     }
-    // TODO: Redirect to /users and send alert the user was deleted
   }
 
   const handleUpdate = async () => {
     if (userId === undefined) {
       return
     }
-    const updated = await UsersService.update(userId, formState)
-
-    if (updated !== null) {
+    const updated: UserResponse = await UsersService.update(userId, formState)
+    console.log({ updated })
+    if (updated.success) {
       // TODO: Add alert the user was updated
     }
   }
