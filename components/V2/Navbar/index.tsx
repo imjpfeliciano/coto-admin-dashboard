@@ -8,17 +8,18 @@ import MaterialIcon from '../../MaterialIcon'
 const Navbar = async () => {
   const supabase = createServerComponentClient({ cookies })
   const { data: { session } } = await supabase.auth.getSession()
-  const user = {
-    name: 'Coto'
-  }
+
+  // TODO: Redirect if no user session
+
+  const user = session?.user.user_metadata
 
   return (
     <div className='flex flex-row justify-between shadow-lg p-4 bg-white'>
       <Link href='/' className='font-bold'>Coto Dashboard v1.0</Link>
 
-      <div className='flex align-center justify-center'>
+      <div className='flex flex-row gap-2 align-center justify-center'>
         <MaterialIcon iconName='notifications' />
-        <span>{user.name}</span>
+        <span>{user?.user_name}</span>
         <AuthButton session={session} />
       </div>
     </div>

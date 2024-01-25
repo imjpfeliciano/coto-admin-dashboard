@@ -15,7 +15,6 @@ export default async function DashboardLayout ({ children }) {
 
   return (
     <div className='flex flex-col'>
-      {/* <AuthButton session={session} /> */}
       <Navbar />
       <div className='flex flex-row'>
         <Sidebar options={SidebarRoutes} />

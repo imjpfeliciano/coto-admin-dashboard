@@ -3,7 +3,7 @@ import {
   Navigation,
   NavigationBrandContainer,
   NavigationProfileContainer
-} from '../components/Navigation'
+} from '../components/V2/Navbar'
 
 const Navbar = () => {
   return (
