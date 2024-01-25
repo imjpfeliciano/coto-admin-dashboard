@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import styled from "styled-components";
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import styled from 'styled-components'
 
 const BreadcumContainer = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ const BreadcumContainer = styled.div`
 
   color: gray; // FIXME: Move color to theme
   margin-bottom: 1rem;
-`;
+`
 
 const BreadcumItem = styled.span`
   margin-right: 0.5rem;
@@ -19,38 +19,38 @@ const BreadcumItem = styled.span`
     border-left: 2px solid gray; // FIXME: Use color from theme
     padding-left: 1rem;
   }
-`;
+`
 
 const Breadcum = () => {
-  const [isServer, setIsServer] = useState(true);
+  const [isServer, setIsServer] = useState(true)
 
   useEffect(() => {
-    setIsServer(false);
-  }, []);
+    setIsServer(false)
+  }, [])
 
-  if (isServer) return null;
+  if (isServer) return null
 
-  const path = window.location.pathname;
+  const path = window.location.pathname
 
-  const pathItems = path.split("/").filter((item) => item !== "");
+  const pathItems = path.split('/').filter((item) => item !== '')
 
   const getPathLink = (index: number) => {
-    const path = pathItems.slice(0, index + 1).join("/");
-    return `/${path}`;
-  };
+    const path = pathItems.slice(0, index + 1).join('/')
+    return `/${path}`
+  }
 
   const pathLinks = pathItems.map((item, index) => ({
     name: item[0].toUpperCase() + item.slice(1),
-    link: getPathLink(index),
-  }));
+    link: getPathLink(index)
+  }))
 
   const breadcumItems = [
     {
-      name: "Home",
-      link: "/",
+      name: 'Home',
+      link: '/'
     },
-    ...pathLinks,
-  ];
+    ...pathLinks
+  ]
 
   return (
     <BreadcumContainer>
@@ -59,10 +59,10 @@ const Breadcum = () => {
           <Link href={item.link} key={index}>
             <BreadcumItem>{item.name}</BreadcumItem>
           </Link>
-        );
+        )
       })}
     </BreadcumContainer>
-  );
-};
+  )
+}
 
-export default Breadcum;
+export default Breadcum

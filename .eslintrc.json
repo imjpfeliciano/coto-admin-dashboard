@@ -1,5 +1,25 @@
 {
   "extends": [
-    "node_modules/ts-standard/eslintrc.json"
-  ]
+    "./node_modules/ts-standard/eslintrc.json",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "@typescript-eslint/dot-notation": "error",
+    "@typescript-eslint/explicit-function-return-type": "warn",
+    "@typescript-eslint/no-misused-promises": "warn",
+    "@typescript-eslint/no-floating-promises": "warn",
+    "@typescript-eslint/quotes": "warn",
+    "@typescript-eslint/comma-dangle": "warn",
+    "no-case-declarations": "warn",
+    "@typescript-eslint/consistent-type-assertions": "warn",
+    "@typescript-eslint/prefer-nullish-coalescing": "warn",
+    "@typescript-eslint/strict-boolean-expressions": "warn"
+  }
 }

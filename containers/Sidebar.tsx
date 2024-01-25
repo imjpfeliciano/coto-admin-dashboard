@@ -1,7 +1,7 @@
-'use client';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import MaterialIcon from '../components/MaterialIcon';
+'use client'
+import Link from 'next/link'
+import React, { useEffect, useState } from 'react'
+import MaterialIcon from '../components/MaterialIcon'
 import {
   AnchorContainer,
   CaretContainer, ItemTitle,
@@ -10,27 +10,27 @@ import {
   SidebarItemContainer,
   SidebarOptionsContainer,
   SubItemContainer
-} from '../components/Sidebar';
-import theme from '../utils/theme';
+} from '../components/Sidebar'
+import theme from '../utils/theme'
 
 interface SidebarBaseItem {
-  icon: string; // FIXME: should be an icon component
-  label: string;
-  path?: string;
+  icon: string // FIXME: should be an icon component
+  label: string
+  path?: string
 }
 
 interface SidebarItem extends SidebarBaseItem {
-  subItems?: SidebarBaseItem[];
-  active?: boolean;
+  subItems?: SidebarBaseItem[]
+  active?: boolean
 }
 
 export interface SidebarOption {
-  title: string;
-  items: SidebarItem[];
+  title: string
+  items: SidebarItem[]
 }
 
 export interface SidebarProps {
-  options: SidebarOption[];
+  options: SidebarOption[]
 }
 
 const SidebarItem = ({
@@ -38,23 +38,23 @@ const SidebarItem = ({
   label,
   path = '#',
   subItems,
-  active,
+  active
 }: SidebarItem) => {
-  const [open, setOpen] = useState(false);
-  const hasSubItems = Boolean(subItems && subItems.length > 0);
-  const Wrapper = hasSubItems ? React.Fragment : Link;
-  const wrapperProps = hasSubItems ? {} : { href: path };
+  const [open, setOpen] = useState(false)
+  const hasSubItems = Boolean((subItems != null) && subItems.length > 0)
+  const Wrapper = hasSubItems ? React.Fragment : Link
+  const wrapperProps = hasSubItems ? {} : { href: path }
 
-  const Container = hasSubItems ? React.Fragment : AnchorContainer;
+  const Container = hasSubItems ? React.Fragment : AnchorContainer
 
   const handleClick = () => {
     if (hasSubItems) {
-      setOpen(!open);
+      setOpen(!open)
     }
-  };
+  }
 
   return (
-    // @ts-ignore
+    // @ts-expect-error
     <Wrapper {...wrapperProps}>
       <Container>
         <SidebarItemContainer
@@ -63,7 +63,7 @@ const SidebarItem = ({
         >
           <MaterialIcon iconName={icon} color={theme.colors.sidebarText} />
           <ItemTitle>{label}</ItemTitle>
-          {subItems && (
+          {(subItems != null) && (
             <CaretContainer>
               <MaterialIcon
                 iconName={open ? 'expand_less' : 'expand_more'}
@@ -72,7 +72,7 @@ const SidebarItem = ({
             </CaretContainer>
           )}
         </SidebarItemContainer>
-        {subItems && subItems.length && open && (
+        {(subItems != null) && (subItems.length > 0) && open && (
           <SubItemContainer open={open}>
             {subItems &&
               subItems.map((item, index) => (
@@ -86,25 +86,25 @@ const SidebarItem = ({
         )}
       </Container>
     </Wrapper>
-  );
-};
+  )
+}
 
 const Sidebar = ({ options }: SidebarProps) => {
-  const [isServer, setIsServer] = useState(true);
+  const [isServer, setIsServer] = useState(true)
 
   useEffect(() => {
-    setIsServer(false);
-  }, []);
+    setIsServer(false)
+  }, [])
 
-  if (isServer) return null;
+  if (isServer) return null
 
   return (
     <SidebarOptionsContainer>
-      {options.length &&
+      {(options.length > 0) &&
         options.map((option, index) => (
           <SidebarGroupContainer key={`sidebar-option-${index}`}>
             <SidebarGroupTitle>{option.title}</SidebarGroupTitle>
-            {option.items.length &&
+            {(option.items.length > 0) &&
               option.items.map((item, itemIndex) => (
                 <SidebarItem
                   key={`sidebar-item-${itemIndex}`}
@@ -115,7 +115,7 @@ const Sidebar = ({ options }: SidebarProps) => {
           </SidebarGroupContainer>
         ))}
     </SidebarOptionsContainer>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

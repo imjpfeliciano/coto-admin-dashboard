@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import MaterialIcon from "../MaterialIcon";
+import styled from 'styled-components'
+import MaterialIcon from '../MaterialIcon'
 
 // FIXME: Move css colors to theme file
 const InputContainer = styled.div`
@@ -9,7 +9,7 @@ const InputContainer = styled.div`
   width: 100%;
 
   margin-bottom: 1rem;
-`;
+`
 
 export const IconContainer = styled.div`
   display: flex;
@@ -26,11 +26,11 @@ export const IconContainer = styled.div`
   border-radius: 0.375rem; // TODO: Remove right border radius
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-`;
+`
 
 const ErrorText = styled.span`
   color: red;
-`;
+`
 
 // FIXME: Check which css rules are necessary
 const Input = styled.input`
@@ -65,18 +65,18 @@ const Input = styled.input`
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(66, 153, 225, 0.5);
   }
-`;
+`
 
 interface InputFieldProps {
-  name: string;
-  type: string;
-  placeholder: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  error?: string;
-  touched?: boolean;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
-  icon: string;
+  name: string
+  type: string
+  placeholder: string
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  error?: string
+  touched?: boolean
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+  icon: string
 }
 
 const InputField = ({
@@ -88,12 +88,12 @@ const InputField = ({
   error,
   touched,
   onBlur,
-  icon,
+  icon
 }: InputFieldProps) => {
   return (
     <InputContainer>
       <IconContainer>
-        <MaterialIcon iconName={icon} color="#808080" />
+        <MaterialIcon iconName={icon} color='#808080' />
       </IconContainer>
 
       <Input
@@ -105,9 +105,9 @@ const InputField = ({
         onBlur={onBlur}
       />
       {/* TODO: Validate an scenario where we receive the error */}
-      {error && touched && <ErrorText>{error}</ErrorText>}
+      {error !== undefined && touched === true && <ErrorText>{error}</ErrorText>}
     </InputContainer>
-  );
-};
+  )
+}
 
-export default InputField;
+export default InputField

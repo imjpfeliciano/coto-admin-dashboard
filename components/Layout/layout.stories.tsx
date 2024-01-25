@@ -1,12 +1,12 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Layout from "./index";
+import React from 'react'
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import Layout from './index'
 
 export default {
-  title: "Components/Layout",
-  component: Layout,
-} as ComponentMeta<typeof Layout>;
+  title: 'Components/Layout',
+  component: Layout
+} as ComponentMeta<typeof Layout>
 
-// @ts-ignore
-const Template: ComponentStory<typeof Layout> = (args) => <Layout {...args} />;
-export const Primary = Template.bind({});
+// @ts-expect-error
+const Template: ComponentStory<typeof Layout> = (args) => <Layout {...args} />
+export const Primary = Template.bind({})

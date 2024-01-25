@@ -1,29 +1,29 @@
-import monk from 'monk';
-import { DEFAULT_PAGE_LIMIT } from '../constants/paginator';
-import { BaseUser } from '../controllers/User';
-import { UserPaginationQuery } from '../types/request';
+import monk from 'monk'
+import { DEFAULT_PAGE_LIMIT } from '../constants/paginator'
+import { BaseUser } from '../controllers/User'
+import { UserPaginationQuery } from '../types/request'
 
-const DB_URI = process.env.MONGO_DB_URI || 'localhost:27017';
-console.log({ DB_URI });
-const db = monk(DB_URI);
+const DB_URI = process.env.MONGO_DB_URI || 'localhost:27017'
+console.log({ DB_URI })
+const db = monk(DB_URI)
 
-const users = db.get('users');
+const users = db.get('users')
 
 interface UserFilters {
-  deletedAt?: { $exists: boolean };
-  active?: boolean;
+  deletedAt?: { $exists: boolean }
+  active?: boolean
 }
 
 const UserModel = {
   create: async (payload: BaseUser) => {
     try {
       // TODO: Validate unique users
-      const created = await users.insert(payload);
-      return created;
+      const created = await users.insert(payload)
+      return created
     } catch (error) {
       return {
-        error,
-      };
+        error
+      }
     }
   },
 
@@ -32,42 +32,42 @@ const UserModel = {
       let {
         limit = DEFAULT_PAGE_LIMIT,
         page = 1,
-        status = 'active',
-      }: UserPaginationQuery = query;
-      limit = Number(limit);
-      page = Number(page);
+        status = 'active'
+      }: UserPaginationQuery = query
+      limit = Number(limit)
+      page = Number(page)
 
-      const skip = Number((page - 1) * limit);
+      const skip = Number((page - 1) * limit)
 
       const filters: UserFilters = {
-        deletedAt: { $exists: false },
-      };
+        deletedAt: { $exists: false }
+      }
 
       if (status !== 'all') {
-        filters['active'] = status === 'active';
+        filters.active = status === 'active'
       }
 
       const [data, count] = await Promise.all([
         users.find(filters, { limit, skip, sort: { createdAt: -1 } }),
-        users.count(filters),
-      ]);
+        users.count(filters)
+      ])
 
-      return { data, count };
+      return { data, count }
     } catch (error) {
       return {
-        error,
-      };
+        error
+      }
     }
   },
 
   get: async (id: string) => {
     try {
-      const user = await users.findOne({ _id: id });
-      return user;
+      const user = await users.findOne({ _id: id })
+      return user
     } catch (error) {
       return {
-        error,
-      };
+        error
+      }
     }
   },
 
@@ -76,36 +76,36 @@ const UserModel = {
       const updated = await users.findOneAndUpdate(
         { _id: id },
         {
-          $set: payload,
+          $set: payload
         }
-      );
-      return updated;
+      )
+      return updated
     } catch (error) {
       return {
-        error,
-      };
+        error
+      }
     }
   },
 
   delete: async (id: string) => {
     try {
       const payload = {
-        deletedAt: new Date().toISOString(),
-      };
+        deletedAt: new Date().toISOString()
+      }
 
       const deleted = await users.findOneAndUpdate(
         { _id: id },
         {
-          $set: payload,
+          $set: payload
         }
-      );
-      return deleted;
+      )
+      return deleted
     } catch (error) {
       return {
-        error,
-      };
+        error
+      }
     }
-  },
-};
+  }
+}
 
-export default UserModel;
+export default UserModel

@@ -1,5 +1,5 @@
-import { css } from "styled-components";
-import theme from "../../utils/theme";
+import { css } from 'styled-components'
+import theme from '../../utils/theme'
 
 export const BaseButton = css`
   height: 32px; // TODO: Check all buttons have the same height
@@ -21,4 +21,4 @@ export const BaseButton = css`
       color: ${theme.colors.white};
     }
   }
-`;
+`

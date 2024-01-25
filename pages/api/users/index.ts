@@ -1,14 +1,14 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import Joi from "@hapi/joi";
-import { StatusCodes } from "http-status-codes";
-import User from "../../../controllers/User";
-import { paginationQuery } from "../../../types/request";
+import Joi from '@hapi/joi';
+import { StatusCodes } from 'http-status-codes';
+import { NextApiRequest, NextApiResponse } from 'next';
+import User from '../../../controllers/User';
+import { paginationQuery } from '../../../types/request';
 
 const UserCreateSchema = Joi.object({
   name: Joi.string().required(),
   lastname: Joi.string().required(),
   email: Joi.string().email().required(),
-  address: Joi.string().required(),
+  address: Joi.string().required()
 });
 
 // /api/users
@@ -19,27 +19,28 @@ const handler = async (
   const { method, body: payload, query = {} } = req;
 
   switch (method) {
-    case "POST":
+    case 'POST':
       const { error } = UserCreateSchema.validate(payload);
 
       // FIXME: Validate error is joi
-      if (error) {
+      if (error != null) {
         return res.status(StatusCodes.BAD_REQUEST).json({
-          message: "Invalid user data",
-          error: error.details[0].message,
+          message: 'Invalid user data',
+          error: error.details[0].message
         });
       }
 
       const newUser = await User.create(payload);
+      // eslint-disable-next-line
       if (newUser.error) {
         return res.status(StatusCodes.BAD_REQUEST).json({
-          error: newUser.error,
+          error: newUser.error
         });
       }
       res.status(StatusCodes.OK).json(newUser);
       break;
 
-    case "GET":
+    case 'GET':
       const users = await User.getAll(query);
       res.status(StatusCodes.OK).json(users);
       break;

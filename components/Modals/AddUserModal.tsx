@@ -1,20 +1,26 @@
-import Modal from ".";
-import AddUserForm from "../../containers/AddUserForm";
+import Modal from '.'
+import AddUserForm from '../../containers/AddUserForm'
 
-const AddUserModal = ({ isOpen, onClose, onSave }: any) => {
+interface AddUserModalProps {
+  isOpen: boolean
+  onClose: () => void
+  onSave: (payload: any) => Promise<void>
+}
+
+const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose, onSave }) => {
   const onUserSave = async (payload: any) => {
-    await onSave(payload);
-    onClose();
+    await onSave(payload)
+    onClose()
     // TODO: Add loading indicator
-  };
+  }
 
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   return (
     <Modal onClose={onClose}>
       <AddUserForm onUserSave={onUserSave} />
     </Modal>
-  );
-};
+  )
+}
 
-export default AddUserModal;
+export default AddUserModal

@@ -1,9 +1,9 @@
-import { IconButton } from '../components/Button';
+import { IconButton } from '../components/Button'
 import {
   Navigation,
   NavigationBrandContainer,
   NavigationProfileContainer
-} from '../components/Navigation';
+} from '../components/Navigation'
 
 const Navbar = () => {
   return (
@@ -11,15 +11,15 @@ const Navbar = () => {
       <NavigationBrandContainer>Coto Dashboard v1.0</NavigationBrandContainer>
       <NavigationProfileContainer>
         <IconButton
-          icon="account_circle"
-          label="Jhon Doe"
+          icon='account_circle'
+          label='Jhon Doe'
           onClick={() => { }}
           withCaret
         />
-        <IconButton icon="notifications" onClick={() => { }} />
+        <IconButton icon='notifications' onClick={() => { }} />
       </NavigationProfileContainer>
     </Navigation>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

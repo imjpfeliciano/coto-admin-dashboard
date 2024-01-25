@@ -1,30 +1,30 @@
-import './globals.css';
+import './globals.css'
 
 interface Props {
-  children: React.ReactNode;
-  session?: any;
+  children: React.ReactNode
+  session?: any
 }
 
 const RootLayout = ({ children, session }: Props) => {
-  console.log({ session });
+  console.log({ session })
   return (
     <html>
       <head>
         <link
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"
+          href='https://fonts.googleapis.com/icon?family=Material+Icons'
+          rel='stylesheet'
         />
         <link
-          href="https://fonts.googleapis.com/css?family=Montserrat"
-          rel="stylesheet"
-          type="text/css"
+          href='https://fonts.googleapis.com/css?family=Montserrat'
+          rel='stylesheet'
+          type='text/css'
         />
       </head>
       <body>
-    {children}
+        {children}
       </body>
     </html>
-  );
-};
+  )
+}
 
-export default RootLayout;
+export default RootLayout
