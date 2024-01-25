@@ -1,41 +1,5 @@
 {
   "extends": [
-    "next/core-web-vitals",
-    "prettier",
-    "eslint-config-next"
-  ],
-  "rules": {
-    "max-len": [
-      "error",
-      {
-        "code": 120,
-        "tabWidth": 2,
-        "ignoreUrls": true,
-        "ignoreStrings": true,
-        "ignoreTemplateLiterals": true,
-        "ignoreRegExpLiterals": true
-      }
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "react/jsx-first-prop-new-line": [
-      "error",
-      "multiline"
-    ],
-    "react/jsx-max-props-per-line": [
-      "error",
-      {
-        "maximum": {
-          "single": 2,
-          "multi": 1
-        }
-      }
-    ],
-    "semi": [
-      "error",
-      "always"
-    ]
-  }
+    "node_modules/ts-standard/eslintrc.json"
+  ]
 }
