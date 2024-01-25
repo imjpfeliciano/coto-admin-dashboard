@@ -2,11 +2,9 @@ import './globals.css'
 
 interface Props {
   children: React.ReactNode
-  session?: any
 }
 
-const RootLayout = ({ children, session }: Props) => {
-  console.log({ session })
+export default function RootLayout ({ children }: Props) {
   return (
     <html>
       <head>
@@ -27,4 +25,3 @@ const RootLayout = ({ children, session }: Props) => {
   )
 }
 
-export default RootLayout
