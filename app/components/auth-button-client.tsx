@@ -7,6 +7,7 @@ import {
 import { useRouter } from 'next/navigation';
 
 const host = process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:3000';
+const redirectCallbackUrl = `${host}/auth/callback`;
 
 export function AuthButton({ session }: { session: Session | null }) {
   const supabase = createClientComponentClient({});
@@ -16,7 +17,7 @@ export function AuthButton({ session }: { session: Session | null }) {
     await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: `${host}/auth/callback`,
+        redirectTo: redirectCallbackUrl,
       },
     });
   };
@@ -33,7 +34,7 @@ export function AuthButton({ session }: { session: Session | null }) {
           onClick={handleSignIn}
           className='bg-green-500 text-white rounded px-2 py-1'
         >
-          Sign In
+          Sign In - {redirectCallbackUrl}
         </button>
       ) : (
         <button
