@@ -6,6 +6,8 @@ import {
 } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 const host = process.env.NEXT_PUBLIC_BASE_URL || 'https://localhost:3000';
 const redirectCallbackUrl = `${host}/auth/callback`;
 
