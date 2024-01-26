@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { SidebarItemProps } from '../../../constants/sidebar'
-import MaterialIcon from '../../MaterialIcon'
+import Link from 'next/link';
+import { SidebarItemProps } from '../../../constants/sidebar';
+import MaterialIcon from '../../MaterialIcon';
 
 const SidebarItem: React.FC<SidebarItemProps> = ({ path, icon, label }) => {
   return (
@@ -13,11 +13,11 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ path, icon, label }) => {
         <span className='ml-3'>{label}</span>
       </Link>
     </li>
-  )
-}
+  );
+};
 
 interface SidebarProps {
-  options: SidebarItemProps[]
+  options: SidebarItemProps[];
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ options }) => {
@@ -31,7 +31,7 @@ const Sidebar: React.FC<SidebarProps> = ({ options }) => {
         </ul>
       </div>
     </aside>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
