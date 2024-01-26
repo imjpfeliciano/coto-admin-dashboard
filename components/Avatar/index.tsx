@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const Avatar = styled.img`
   border-radius: 50%;
@@ -11,4 +11,4 @@ export const Avatar = styled.img`
     width: 36px;
     height: 36px;
   }
-`;
+`

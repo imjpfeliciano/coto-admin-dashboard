@@ -1,32 +1,27 @@
-import AppContainer from '../containers/AppContainer';
-import AppSessionProvider from './SessionProvider';
+import './globals.css'
+
 interface Props {
-  children: React.ReactNode;
-  session?: any;
+  children: React.ReactNode
 }
 
-const RootLayout = ({ children, session }: Props) => {
-  console.log({ session });
+export default function RootLayout ({ children }: Props) {
   return (
     <html>
       <head>
         <link
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"
+          href='https://fonts.googleapis.com/icon?family=Material+Icons'
+          rel='stylesheet'
         />
         <link
-          href="http://fonts.googleapis.com/css?family=Montserrat"
-          rel="stylesheet"
-          type="text/css"
+          href='https://fonts.googleapis.com/css?family=Montserrat'
+          rel='stylesheet'
+          type='text/css'
         />
       </head>
       <body>
-        <AppSessionProvider session={session}>
-          <AppContainer>{children}</AppContainer>
-        </AppSessionProvider>
+        {children}
       </body>
     </html>
-  );
-};
+  )
+}
 
-export default RootLayout;

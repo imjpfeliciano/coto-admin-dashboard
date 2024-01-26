@@ -1,84 +1,84 @@
+import UserModel from '../models/User'
+import { paginationQuery } from '../types/request'
+
 export interface UserRequest {
-  name: string;
-  lastname: string;
-  email: string; // When adding a new user, this field is required to be unique
-  address: string; // Internal address
+  name: string
+  lastname: string
+  email: string // When adding a new user, this field is required to be unique
+  address: string // Internal address
 }
 export interface BaseUser extends UserRequest {
-  scopes: string[]; // ["user", "admin"]
-  createdAt: string;
-  updatedAt: string;
-  deletedAt?: string;
-  active: boolean;
+  scopes: string[] // ["user", "admin"]
+  createdAt: string
+  updatedAt: string
+  deletedAt?: string
+  active: boolean
 }
 
 export interface IUser extends BaseUser {
-  _id: string;
+  _id: string
   // TODO: Validate if houseId is required when adding new users
   // TODO: Validate if we want to add vehicles to the user model
 }
 
-import UserModel from '../models/User';
-import { paginationQuery } from '../types/request';
-
 class User {
-  constructor() { }
+  constructor () { }
 
-  async create(payload: UserRequest) {
-    const createdAt = new Date().toISOString();
-    const updatedAt = new Date().toISOString();
-    const scopes = ['user'];
+  async create (payload: UserRequest) {
+    const createdAt = new Date().toISOString()
+    const updatedAt = new Date().toISOString()
+    const scopes = ['user']
 
     const newUser = {
       ...payload,
       active: true,
       createdAt,
       updatedAt,
-      scopes,
-    };
+      scopes
+    }
 
     try {
-      const response = await UserModel.create(newUser);
+      const response = await UserModel.create(newUser)
       if (response.error) {
-        return response;
+        return response
       }
-      return response;
+      return response
     } catch (error) {
       return {
-        error,
-      };
+        error
+      }
     }
   }
 
-  async getAll(query: paginationQuery) {
+  async getAll (query: paginationQuery) {
     // TODO: Add error handling
-    const response = await UserModel.getAll(query);
-    return response;
+    const response = await UserModel.getAll(query)
+    return response
   }
 
-  async get(id: string) {
-    const user = await UserModel.get(id);
+  async get (id: string) {
+    const user = await UserModel.get(id)
 
     // TODO: Validate if we want to return a 404 error
-    return user;
+    return user
   }
 
-  async update(id: string, data: any) {
+  async update (id: string, data: any) {
     const payload = {
       ...data,
-      updatedAt: new Date().toISOString(),
-    };
-    const updatedUser = await UserModel.update(id, payload);
-    return updatedUser;
+      updatedAt: new Date().toISOString()
+    }
+    const updatedUser = await UserModel.update(id, payload)
+    return updatedUser
   }
 
-  async delete(id: string) {
+  async delete (id: string) {
     // TODO: Validate that the request is coming from an admin
 
     // TODO: Validate if we want to return a 404 error
-    const deleted = await UserModel.delete(id);
-    return deleted;
+    const deleted = await UserModel.delete(id)
+    return deleted
   }
 }
 
-export default new User();
+export default new User()

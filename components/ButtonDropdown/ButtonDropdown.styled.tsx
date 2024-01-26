@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { BaseButton } from "../Button/Button.styled";
+import styled from 'styled-components'
+import { BaseButton } from '../Button/Button.styled'
 
 export const DropdownContainer = styled.div`
   position: relative;
-`;
+`
 
 export const ButtonControl = styled.div`
   ${BaseButton}
@@ -13,16 +13,16 @@ export const ButtonControl = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
+`
 
 export const ControlLabelContainer = styled.div`
   display: flex;
   align-items: center;
-`;
+`
 
 export const ButtonLabel = styled.span`
   margin-left: 0.5rem;
-`;
+`
 
 export const DropdownMenu = styled.div`
   display: block;
@@ -32,7 +32,7 @@ export const DropdownMenu = styled.div`
   right: 0;
   background-color: white;
   z-index: 1;
-`;
+`
 
 export const DropdownItem = styled.div`
   padding: 0.5rem 1rem;
@@ -60,4 +60,4 @@ export const DropdownItem = styled.div`
     background-color: #ddd;
     color: white;
   }
-`;
+`

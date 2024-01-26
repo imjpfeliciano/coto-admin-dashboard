@@ -1,6 +1,6 @@
 // Ingresos:
 
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next'
 
 /**
  * - Cuotas de mantenimiento
@@ -8,5 +8,5 @@ import { NextApiRequest, NextApiResponse } from 'next';
  * - Cuotas por multas
  */
 export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  res.status(200).json({ name: 'John Doe' });
-};
+  res.status(200).json({ name: 'John Doe' })
+}

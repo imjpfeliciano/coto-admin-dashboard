@@ -1,8 +1,8 @@
-import type { Config } from "jest";
+import type { Config } from 'jest'
 
 const config: Config = {
   verbose: true,
-  modulePathIgnorePatterns: ["<rootDir>/e2e/"],
-};
+  modulePathIgnorePatterns: ['<rootDir>/e2e/']
+}
 
-export default config;
+export default config

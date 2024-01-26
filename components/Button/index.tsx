@@ -1,14 +1,14 @@
-import styled from "styled-components";
-import MaterialIcon from "../MaterialIcon";
-import theme from "../../utils/theme";
-import { BaseButton } from "./Button.styled";
+import styled from 'styled-components'
+import MaterialIcon from '../MaterialIcon'
+import theme from '../../utils/theme'
+import { BaseButton } from './Button.styled'
 
-export const Button = styled.button``;
+export const Button = styled.button``
 
 const ButtonText = styled.span`
   color: ${theme.colors.accent};
   margin-left: 0.5rem;
-`;
+`
 
 export const ButtonWithIcon = styled.button`
   ${BaseButton}
@@ -22,32 +22,20 @@ export const ButtonWithIcon = styled.button`
       color: ${theme.colors.white};
     }
   }
-`;
-
-const IconContainer = styled.div`
-  width: 24px;
-  height: 24px;
-
-  padding: 0.25rem;
-  border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+`
 
 interface IconButtonProps {
-  icon: string;
-  label?: string;
-  onClick?: () => void;
-  withCaret?: boolean;
+  icon: string
+  label?: string
+  onClick?: () => void
+  withCaret?: boolean
 }
 
 export const IconButton = ({
   icon,
   label,
   onClick,
-  withCaret,
+  withCaret
 }: IconButtonProps) => {
   return (
     <ButtonWithIcon onClick={onClick}>
@@ -55,10 +43,10 @@ export const IconButton = ({
       {label && <ButtonText>{label}</ButtonText>}
       {withCaret && (
         <MaterialIcon
-          iconName="keyboard_arrow_down"
+          iconName='keyboard_arrow_down'
           color={theme.colors.accent}
         />
       )}
     </ButtonWithIcon>
-  );
-};
+  )
+}

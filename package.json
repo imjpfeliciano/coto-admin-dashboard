@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -11,26 +11,31 @@
     "build-storybook": "build-storybook",
     "test": "jest --watch --env=jsdom",
     "test:ci": "jest --ci --env=jsdom",
-    "test:e2e": "playwright test --browser=chromium"
+    "test:e2e": "playwright test --browser=chromium",
+    "format": "prettier --check --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@auth/core": "^0.4.0",
-    "@auth0/nextjs-auth0": "^2.2.1",
     "@hapi/joi": "^17.1.1",
+    "@supabase/auth-helpers-nextjs": "^0.8.7",
+    "@supabase/supabase-js": "^2.39.3",
     "@types/styled-components": "^5.1.26",
     "babel-preset-next": "^1.4.0",
+    "clsx": "^2.1.0",
+    "eslint-config-prettier": "^9.1.0",
     "http-status-codes": "^2.2.0",
     "moment": "^2.29.4",
     "monk": "^7.3.4",
-    "next": "^13.0.2",
-    "next-auth": "^4.19.2",
+    "next": "^14.1.0",
+    "prettier": "^3.2.4",
     "react": "^18.2.0",
     "react-content-loader": "^6.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "ts-standard": "^12.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.19.0",
+    "@next/eslint-plugin-next": "^14.1.0",
     "@playwright/test": "^1.26.1",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
@@ -48,17 +53,11 @@
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^8.2.5",
-    "eslint": "8.23.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-next": "^13.0.2",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-react": "^7.31.10",
-    "eslint-plugin-storybook": "^0.6.4",
     "jest": "^29.1.2",
     "jest-environment-jsdom": "^29.1.2",
     "postcss": "^8.4.18",
     "tailwindcss": "^3.2.2",
     "ts-node": "^10.9.1",
-    "typescript": "^4.8.2"
+    "typescript": "5.3.3"
   }
 }
